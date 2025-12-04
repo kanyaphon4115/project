@@ -123,8 +123,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['avatar']) && isset($
 
                 <hr class="my-3">
 
-                <!-- Upload form: auto-submit when a file is picked -->
-              <!-- Upload Profile Section -->
 <div class="mb-3">
     <p class="text-sm font-medium text-gray-700 mb-1">เปลี่ยนรูปโปรไฟล์</p>
 

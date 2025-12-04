@@ -80,11 +80,6 @@ $dog = $result->fetch_assoc();
            🐾 Adopt Me
         </a>
 
-        <a href="homeped.php"
-           class="flex-1 text-center bg-gray-300 py-3 rounded-xl text-lg font-semibold hover:bg-gray-400 transition">
-           Back to Home
-        </a>
-
     </div>
 
 </div>
