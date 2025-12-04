@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("database/db_ped.php"); // เชื่อมฐานข้อมูล
+include("database/db_ped.php"); // DB Connection
 
 // โหลดรูปโปรไฟล์
 $avatar_src = null;
@@ -12,8 +12,52 @@ if (isset($_SESSION['user_id'])) {
     }
 }
 
-// โหลดข้อมูลสุนัขทั้งหมด (ค่าเริ่มต้น)
-$dogs = $con->query("SELECT * FROM dogs ORDER BY id ASC");
+// ---------------- FILTER -----------------
+$filter_gender = $_GET['gender'] ?? [];
+$filter_age = $_GET['age'] ?? [];
+$filter_breed = $_GET['breed'] ?? [];
+
+$sql = "SELECT * FROM dogs WHERE 1";
+
+// Gender filter
+if (!empty($filter_gender)) {
+    $g = "'" . implode("','", $filter_gender) . "'";
+    $sql .= " AND gender IN ($g)";
+}
+
+// Age filter + อายุน้อยกว่า 6 เดือน (NEW)
+if (!empty($filter_age)) {
+    $age_sql = [];
+    
+    foreach ($filter_age as $age) {
+
+        // ⭐ เพิ่มเงื่อนไขใหม่: น้อยกว่า 6 เดือน
+        if ($age == "less6") {
+            $age_sql[] = "(age LIKE '%week%' 
+                        OR age LIKE '1 month'
+                        OR age LIKE '2 months'
+                        OR age LIKE '3 months'
+                        OR age LIKE '4 months'
+                        OR age LIKE '5 months')";
+        }
+
+        if ($age == "6months") $age_sql[] = "age = '6 months'";
+        if ($age == "1year") $age_sql[] = "age = '1 year'";
+        if ($age == "more1") $age_sql[] = "age LIKE '%years%'";
+    }
+
+    if (!empty($age_sql)) {
+        $sql .= " AND (" . implode(" OR ", $age_sql) . ")";
+    }
+}
+
+// Breed filter
+if (!empty($filter_breed)) {
+    $b = "'" . implode("','", $filter_breed) . "'";
+    $sql .= " AND breed IN ($b)";
+}
+
+$dogs = $con->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -47,8 +91,8 @@ $dogs = $con->query("SELECT * FROM dogs ORDER BY id ASC");
             PetHome
         </h1>
 
-        <!-- MENU ขวาสุด -->
-        <ul class="flex items-center space-x-8 font-semibold text-gray-900 ml-auto">
+        <!-- MENU -->
+        <ul class="flex items-center space-x-6 font-semibold text-gray-900 ml-auto">
             <li><a href="homeped.php" class="text-green-700 font-bold">HOME</a></li>
             <li><a href="#" class="hover:text-green-700">FORM</a></li>
             <li><a href="#" class="hover:text-green-700">DONATE</a></li>
@@ -58,14 +102,11 @@ $dogs = $con->query("SELECT * FROM dogs ORDER BY id ASC");
             <?php if(isset($_SESSION['user_id'])): ?>
             <li class="relative group">
 
-                <!-- รูปโปรไฟล์ -->
                 <button class="w-10 h-10 rounded-full bg-green-300 shadow-md overflow-hidden flex items-center justify-center">
                     <?php if ($avatar_src): ?>
-                        <img src="<?php echo $avatar_src; ?>" class="w-full h-full object-cover">
+                        <img src="<?= $avatar_src ?>" class="w-full h-full object-cover">
                     <?php else: ?>
-                        <span class="text-white font-bold">
-                            <?php echo strtoupper($_SESSION['email'][0]); ?>
-                        </span>
+                        <span class="text-white font-bold"><?= strtoupper($_SESSION['email'][0]); ?></span>
                     <?php endif; ?>
                 </button>
 
@@ -74,140 +115,141 @@ $dogs = $con->query("SELECT * FROM dogs ORDER BY id ASC");
                             opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
 
                     <p class="text-sm text-gray-500">เข้าสู่ระบบเป็น</p>
-                    <p class="font-bold"><?php echo explode("@", $_SESSION['email'])[0]; ?></p>
-                    <p class="text-sm mb-2"><?php echo $_SESSION['email']; ?></p>
+                    <p class="font-bold"><?= explode("@", $_SESSION['email'])[0]; ?></p>
+                    <p class="text-sm"><?= $_SESSION['email']; ?></p>
 
-                    <hr class="my-2">
+                    <hr class="my-3">
 
-                    <!-- Upload Profile -->
                     <form method="POST" enctype="multipart/form-data">
                         <label class="flex items-center gap-3 cursor-pointer bg-gray-100 p-2 rounded-lg hover:bg-gray-200">
                             <div class="w-10 h-10 rounded-full overflow-hidden shadow">
                                 <?php if ($avatar_src): ?>
-                                    <img src="<?php echo $avatar_src; ?>" class="w-full h-full object-cover">
+                                    <img src="<?= $avatar_src ?>" class="w-full h-full object-cover">
                                 <?php else: ?>
-                                    <div class="w-full h-full bg-green-400 text-white flex items-center justify-center font-bold">
-                                        <?php echo strtoupper($_SESSION['email'][0]); ?>
+                                    <div class="w-full h-full bg-green-400 flex items-center justify-center text-white font-bold">
+                                        <?= strtoupper($_SESSION['email'][0]); ?>
                                     </div>
                                 <?php endif; ?>
                             </div>
-
-                            <span class="text-sm text-gray-700">เปลี่ยนรูปโปรไฟล์</span>
+                            <span class="text-sm">เปลี่ยนรูปโปรไฟล์</span>
                             <input type="file" name="avatar" class="hidden" onchange="this.form.submit()" accept="image/*">
                         </label>
                     </form>
 
                     <hr class="my-3">
-                    <a href="#" class="block py-1 hover:text-green-600">⚖️ น้ำหนักของฉัน</a>
-                    <a href="#" class="block py-1 hover:text-green-600">🏃 การออกกำลังกาย</a>
-                    <a href="#" class="block py-1 hover:text-green-600">📄 บทความ</a>
+                    <a href="#" class="block py-1">⚖️ น้ำหนักของฉัน</a>
+                    <a href="#" class="block py-1">🏃 การออกกำลังกาย</a>
+                    <a href="#" class="block py-1">📄 บทความ</a>
 
                     <hr class="my-3">
-                    <a href="logout.php" class="text-red-600 font-bold">ออกจากระบบ</a>
+                    <a href="index.php" class="text-red-600 font-bold">ออกจากระบบ</a>
                 </div>
 
             </li>
-
-            <?php else: ?>
-            <li><a href="login.php" class="px-5 py-2 bg-green-600 text-white rounded-full shadow-md">Login</a></li>
             <?php endif; ?>
         </ul>
+
     </div>
 </nav>
-
 
 <!-- DOG LIST -->
 <div class="pt-28 px-6 pb-10">
 
     <h2 class="text-2xl font-bold text-gray-800 mb-4">🐶 Meet Our Lovely Dogs</h2>
 
-    <div id="dogList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-        <?php while($dog = $dogs->fetch_assoc()): ?>
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+    <?php while($dog = $dogs->fetch_assoc()): ?>
+<a href="dog_details.php?id=<?= $dog['id'] ?>" class="block">
+    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:scale-[1.02] transition">
 
-            <img src="<?php echo $dog['image']; ?>" class="w-full h-48 object-cover">
+        <img src="<?= $dog['image'] ?>" class="w-full h-48 object-cover">
 
-            <div class="p-4">
-                <p class="font-bold text-gray-900 text-lg"><?php echo $dog['name']; ?></p>
-                <p class="text-sm text-gray-600 -mt-1"><?php echo $dog['breed']; ?></p>
+        <div class="p-4">
+            <p class="font-bold text-lg"><?= $dog['name'] ?></p>
+            <p class="text-sm text-gray-600"><?= $dog['breed'] ?></p>
 
-                <div class="flex justify-between text-sm text-gray-500 mt-2">
-                    <span><?php echo $dog['age']; ?></span>
-                    <span><?php echo $dog['gender']; ?></span>
-                </div>
+            <div class="flex justify-between text-sm text-gray-500 mt-2">
+                <span><?= $dog['age'] ?></span>
+                <span><?= $dog['gender'] ?></span>
             </div>
-
         </div>
-        <?php endwhile; ?>
 
     </div>
-</div>
+</a>
+<?php endwhile; ?>
 
+
+    </div>
+
+</div>
 
 <!-- FILTER SIDEBAR -->
 <div id="filterSidebar"
-     class="fixed top-0 left-0 w-80 max-w-full h-full bg-white shadow-2xl
-            transform -translate-x-full transition-all duration-300 z-50">
+     class="fixed top-0 left-0 w-80 h-full bg-white shadow-2xl transform -translate-x-full
+            transition-all duration-300 z-50">
 
-    <div class="p-5 border-b flex justify-between items-center">
-        <h2 class="text-lg font-bold">Filter Dogs</h2>
-        <button id="closeFilter" class="text-xl font-bold">✕</button>
+    <div class="p-5 border-b flex justify-between">
+        <h2 class="font-bold">Filter Dogs</h2>
+        <button id="closeFilter" class="text-xl">✕</button>
     </div>
 
-    <!-- FILTER OPTIONS -->
-    <div class="p-5 space-y-6 overflow-y-auto h-[90%]">
+    <form method="GET" class="p-5 space-y-6">
 
+        <!-- Gender -->
         <div>
             <p class="font-semibold mb-2">เพศ</p>
-            <label class="flex gap-2"><input type="checkbox" class="filter" name="gender[]" value="Male"> ชาย</label>
-            <label class="flex gap-2"><input type="checkbox" class="filter" name="gender[]" value="Female"> หญิง</label>
+            <label class="flex gap-2"><input type="checkbox" name="gender[]" value="Male"> ชาย</label>
+            <label class="flex gap-2"><input type="checkbox" name="gender[]" value="Female"> หญิง</label>
         </div>
 
+        <!-- Age -->
         <div>
             <p class="font-semibold mb-2">อายุ</p>
-            <label class="flex gap-2"><input type="checkbox" class="filter" name="age[]" value="6 months"> 6 เดือน</label>
-            <label class="flex gap-2"><input type="checkbox" class="filter" name="age[]" value="1 year"> 1 ปี</label>
-            <label class="flex gap-2"><input type="checkbox" class="filter" name="age[]" value="over 1 year"> มากกว่า 1 ปี</label>
+            <label class="flex gap-2"><input type="checkbox" name="age[]" value="less6"> น้อยกว่า 6 เดือน</label>
+            <label class="flex gap-2"><input type="checkbox" name="age[]" value="6months"> 6 เดือน</label>
+            <label class="flex gap-2"><input type="checkbox" name="age[]" value="1year"> 1 ปี</label>
+            <label class="flex gap-2"><input type="checkbox" name="age[]" value="more1"> มากกว่า 1 ปี</label>
         </div>
 
+        <!-- Breed -->
         <div>
             <p class="font-semibold mb-2">สายพันธุ์</p>
-            <label class="flex gap-2"><input type="checkbox" class="filter" name="breed[]" value="Shih Tzu"> Shih Tzu</label>
-            <label class="flex gap-2"><input type="checkbox" class="filter" name="breed[]" value="Samoyed"> Samoyed</label>
-            <label class="flex gap-2"><input type="checkbox" class="filter" name="breed[]" value="Jack Russell"> Jack Russell</label>
+            <label class="flex gap-2"><input type="checkbox" name="breed[]" value="Shih Tzu"> Shih Tzu</label>
+            <label class="flex gap-2"><input type="checkbox" name="breed[]" value="Samoyed"> Samoyed</label>
+            <label class="flex gap-2"><input type="checkbox" name="breed[]" value="Yorkshire Terrier"> Yorkshire Terrier</label>
+            <label class="flex gap-2"><input type="checkbox" name="breed[]" value="Jack Russell"> Jack Russell</label>
         </div>
 
-    </div>
+        <button type="submit"
+                class="w-full bg-green-600 text-white py-2 rounded-lg shadow hover:bg-green-700">
+            Apply Filter
+        </button>
+
+    </form>
 </div>
 
+<!-- CHAT FLOATING BUTTON -->
+<a href="#"
+   class="fixed bottom-6 right-6 bg-blue-600 w-14 h-14 rounded-full shadow-xl
+          flex items-center justify-center hover:bg-blue-700 transition duration-300">
 
-<!-- JAVASCRIPT -->
+    <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" width="30" height="30">
+        <path d="M12 2C6.486 2 2 6.033 2 10.993c0 2.835 1.354 5.389 3.598 7.131V22l3.289-1.795c.993.276 2.042.429 3.113.429 
+                5.514 0 10-4.033 10-8.993S17.514 2 12 2zm1.066 12.596l-2.648-2.826-4.4 2.826 
+                4.84-5.173 2.648 2.826 4.4-2.826-4.84 5.173z"/>
+    </svg>
+
+</a>
+
+<!-- JS CONTROL -->
 <script>
-document.getElementById("openFilter").onclick = () =>
+document.getElementById("openFilter").onclick = function() {
     document.getElementById("filterSidebar").classList.remove("-translate-x-full");
-
-document.getElementById("closeFilter").onclick = () =>
+};
+document.getElementById("closeFilter").onclick = function() {
     document.getElementById("filterSidebar").classList.add("-translate-x-full");
-
-document.querySelectorAll(".filter").forEach(chk =>
-    chk.addEventListener("change", loadFilteredDogs)
-);
-
-function loadFilteredDogs() {
-    let formData = new FormData();
-
-    document.querySelectorAll(".filter:checked").forEach(chk =>
-        formData.append(chk.name, chk.value)
-    );
-
-    fetch("filter_dogs.php", {
-        method: "POST",
-        body: formData
-    })
-    .then(res => res.text())
-    .then(html => document.getElementById("dogList").innerHTML = html);
-}
+};
 </script>
 
 </body>
