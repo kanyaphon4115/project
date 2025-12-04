@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['avatar']) && isset($
 
         <!-- MENU (ขยับไปขวา) -->
 <ul class="flex items-center space-x-8 text-sm font-semibold text-gray-900 ml-auto mr-4">
-            <li><a href="home.php" class="hover:text-green-700">HOME</a></li>
+            <li><a href="homeped.php" class="hover:text-green-700">HOME</a></li>
             <li><a href="#" class="hover:text-green-700">FORM</a></li>
             <li><a href="#" class="hover:text-green-700">DONATE</a></li>
             <li><a href="#" class="hover:text-green-700">REQUEST STATUS</a></li>
