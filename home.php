@@ -1,127 +1,148 @@
 <?php
 session_start();
+include("database/db_ped.php");
 
 // โหลดรูปโปรไฟล์
 $avatar_src = null;
 if (isset($_SESSION['user_id'])) {
     $uid = intval($_SESSION['user_id']);
-    $matches = glob(__DIR__ . '/uploads/avatar_user_' . $uid . '.*');
+    $matches = glob(__DIR__ . "/uploads/avatar_user_$uid.*");
     if (!empty($matches)) {
-        $avatar_src = 'uploads/' . basename($matches[0]);
+        $avatar_src = "uploads/" . basename($matches[0]);
     }
 }
+
+// ดึงข้อมูลสุนัขจากฐานข้อมูล
+$dogs = $con->query("SELECT * FROM dogs ORDER BY id ASC");
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>PetHome - Home</title>
+<title>PetHome</title>
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
 @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-6px); }
-    100% { transform: translateY(0px); }
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
 }
 </style>
 </head>
 
-<body class="bg-[#f8d7a0] min-h-screen">
+<body class="bg-[#f7d7a3] min-h-screen">
 
 <!-- NAVBAR -->
-<nav class="w-full bg-white/40 backdrop-blur-md shadow-sm fixed top-0 left-0 p-4 z-20">
-    <div class="flex items-center justify-between">
+<nav class="w-full fixed top-0 left-0 bg-white/40 backdrop-blur-md shadow-sm py-4 z-20">
+    <div class="flex items-center px-6 justify-between">
 
-        <!-- BACK BUTTON -->
-        <a href="index.php" class="text-2xl bg-white/60 p-2 rounded-full shadow">
-            ←
-        </a>
+        <!-- LOGO -->
+        <h1 class="flex items-center gap-3 text-2xl font-extrabold text-[#2f5d31]">
+            <div class="bg-white rounded-full shadow-md p-1 px-2">🐾</div>
+            PetHome
+        </h1>
 
-        <h1 class="font-bold text-xl">PetHome</h1>
+        <!-- MENU -->
+        <ul class="flex items-center space-x-8 font-semibold text-gray-900">
+            <li><a href="home.php" class="hover:text-green-700">HOME</a></li>
+            <li><a href="#" class="hover:text-green-700">FORM</a></li>
+            <li><a href="#" class="hover:text-green-700">DONATE</a></li>
+            <li><a href="#" class="hover:text-green-700">REQUEST STATUS</a></li>
 
-        <!-- PROFILE ICON -->
-        <a href="homepage.php" class="w-10 h-10 rounded-full overflow-hidden shadow-lg">
-            <?php if ($avatar_src): ?>
-                <img src="<?= $avatar_src ?>" class="w-full h-full object-cover">
-            <?php else: ?>
-                <div class="w-full h-full bg-green-500 flex items-center justify-center text-white font-bold">
-                    <?= strtoupper($_SESSION['email'][0]) ?>
+            <!-- PROFILE -->
+            <?php if(isset($_SESSION['user_id'])): ?>
+            <li class="relative group">
+
+                <button class="w-10 h-10 rounded-full bg-green-300 shadow-md overflow-hidden flex items-center justify-center">
+                    <?php if ($avatar_src): ?>
+                        <img src="<?php echo $avatar_src; ?>" class="w-full h-full object-cover">
+                    <?php else: ?>
+                        <span class="text-white font-bold">
+                            <?php echo strtoupper($_SESSION['email'][0]); ?>
+                        </span>
+                    <?php endif; ?>
+                </button>
+
+                <!-- DROPDOWN -->
+                <div class="absolute right-0 mt-3 w-60 bg-white shadow-xl rounded-xl p-4 text-gray-700
+                            opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
+
+                    <p class="text-sm text-gray-500">เข้าสู่ระบบเป็น</p>
+                    <p class="font-bold"><?php echo explode("@", $_SESSION['email'])[0]; ?></p>
+                    <p class="text-sm mb-2"><?php echo $_SESSION['email']; ?></p>
+
+                    <hr class="my-2">
+
+                    <!-- Upload Profile Section -->
+                    <form method="POST" enctype="multipart/form-data">
+                        <label class="flex items-center gap-3 cursor-pointer bg-gray-100 p-2 rounded-lg hover:bg-gray-200">
+                            <div class="w-10 h-10 rounded-full overflow-hidden shadow">
+                                <?php if ($avatar_src): ?>
+                                    <img src="<?php echo $avatar_src; ?>" class="w-full h-full object-cover">
+                                <?php else: ?>
+                                    <div class="w-full h-full bg-green-400 text-white flex items-center justify-center font-bold">
+                                        <?php echo strtoupper($_SESSION['email'][0]); ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+
+                            <span class="text-sm text-gray-700">เปลี่ยนรูปโปรไฟล์</span>
+                            <input type="file" name="avatar" class="hidden" onchange="this.form.submit()" accept="image/*">
+                        </label>
+                    </form>
+
+                    <hr class="my-3">
+                    <a href="#" class="block py-1 hover:text-green-600">⚖️ น้ำหนักของฉัน</a>
+                    <a href="#" class="block py-1 hover:text-green-600">🏃 การออกกำลังกาย</a>
+                    <a href="#" class="block py-1 hover:text-green-600">📄 บทความ</a>
+
+                    <hr class="my-3">
+                    <a href="logout.php" class="text-red-600 font-bold">ออกจากระบบ</a>
                 </div>
-            <?php endif ?>
-        </a>
-
+            </li>
+            <?php else: ?>
+            <li>
+                <a href="login.php" 
+                   class="px-5 py-2 bg-green-600 text-white rounded-full shadow-md hover:bg-green-700">
+                   Login
+                </a>
+            </li>
+            <?php endif; ?>
+        </ul>
     </div>
 </nav>
 
-<!-- CONTENT -->
-<div class="pt-24 px-6">
+<!-- DOG LIST SECTION -->
+<div class="pt-28 px-6 pb-10">
 
-    <!-- TITLE -->
-    <h2 class="text-2xl font-bold mb-4">สัตว์เลี้ยงที่พร้อมรับเลี้ยง</h2>
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">🐶 Meet Our Lovely Dogs</h2>
 
-    <!-- GRID OF PET CARDS -->
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-        <!-- PET CARD (EXAMPLE 1) -->
-        <div class="bg-white rounded-xl shadow-md overflow-hidden">
-            <img src="pets/dog1.jpg" class="w-full h-32 object-cover">
-            <div class="p-3">
-                <p class="font-bold text-sm">Buggy</p>
-                <p class="text-xs text-gray-600">Jack Russell</p>
-                <p class="text-xs text-gray-400">6 months • Male</p>
+        <?php while($dog = $dogs->fetch_assoc()): ?>
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+
+            <img src="<?php echo $dog['image']; ?>" 
+                 class="w-full h-48 object-cover">
+
+            <div class="p-4">
+                <p class="font-bold text-gray-900 text-lg"><?php echo $dog['name']; ?></p>
+                <p class="text-sm text-gray-600 -mt-1"><?php echo $dog['breed']; ?></p>
+
+                <div class="flex justify-between text-sm text-gray-500 mt-2">
+                    <span><?php echo $dog['age']; ?></span>
+                    <span><?php echo $dog['gender']; ?></span>
+                </div>
             </div>
-        </div>
 
-        <!-- PET CARD 2 -->
-        <div class="bg-white rounded-xl shadow-md overflow-hidden">
-            <img src="pets/dog2.jpg" class="w-full h-32 object-cover">
-            <div class="p-3">
-                <p class="font-bold text-sm">Peach</p>
-                <p class="text-xs text-gray-600">Shih Tzu</p>
-                <p class="text-xs text-gray-400">4 months • Female</p>
-            </div>
         </div>
-
-        <!-- PET CARD 3 -->
-        <div class="bg-white rounded-xl shadow-md overflow-hidden">
-            <img src="pets/dog3.jpg" class="w-full h-32 object-cover">
-            <div class="p-3">
-                <p class="font-bold text-sm">Gary</p>
-                <p class="text-xs text-gray-600">Yorkshire Terrier</p>
-                <p class="text-xs text-gray-400">3 years • Female</p>
-            </div>
-        </div>
-
-        <!-- PET CARD 4 -->
-        <div class="bg-white rounded-xl shadow-md overflow-hidden">
-            <img src="pets/dog4.jpg" class="w-full h-32 object-cover">
-            <div class="p-3">
-                <p class="font-bold text-sm">Willie</p>
-                <p class="text-xs text-gray-600">Samoyed</p>
-                <p class="text-xs text-gray-400">1.5 years • Male</p>
-            </div>
-        </div>
-
-        <!-- PET CARD 5 -->
-        <div class="bg-white rounded-xl shadow-md overflow-hidden col-span-2">
-            <img src="pets/dog5.jpg" class="w-full h-32 object-cover">
-            <div class="p-3">
-                <p class="font-bold text-sm">Kiwi</p>
-                <p class="text-xs text-gray-600">Yorkshire Terrier</p>
-                <p class="text-xs text-gray-400">1 year • Male</p>
-            </div>
-        </div>
+        <?php endwhile; ?>
 
     </div>
 
 </div>
-
-<!-- FLOAT BUTTON -->
-<a href="chat.php"
-   class="fixed bottom-6 right-6 bg-blue-600 p-4 rounded-full shadow-xl">
-    <span class="text-white text-2xl">💬</span>
-</a>
 
 </body>
 </html>
