@@ -36,7 +36,7 @@
             <li><a href="#" class="hover:text-green-700">FORM</a></li>
             <li><a href="#" class="hover:text-green-700">DONATE</a></li>
             <li><a href="#" class="hover:text-green-700">REQUEST STATUS</a></li>
-            <li><a href="#" class="hover:text-green-700">PROFILE</a></li>
+            <!--  <li><a href="#" class="hover:text-green-700">PROFILE</a></li>-->
               <li>
         <a href="login.php"
            class="px-5 py-2 rounded-full bg-green-600 text-white font-semibold shadow-md hover:bg-green-700 transition">

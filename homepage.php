@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['avatar']) && isset($
             <li><a href="#" class="hover:text-green-700">FORM</a></li>
             <li><a href="#" class="hover:text-green-700">DONATE</a></li>
             <li><a href="#" class="hover:text-green-700">REQUEST STATUS</a></li>
-            <li><a href="#" class="hover:text-green-700">PROFILE</a></li>
+           <!-- <li><a href="#" class="hover:text-green-700">PROFILE</a></li>-->
               <li>
         <?php if(isset($_SESSION['user_id'])): ?>
 
