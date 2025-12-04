@@ -60,7 +60,7 @@ $confirm = $_POST['confirm_password'] ?? ''; // ← แก้ให้ตรง�
 
 <body class="bg-[#f8d7a0] min-h-screen relative overflow-hidden">
 
-    <a href="login.php" 
+    <a href="index.php" 
        class="absolute top-6 left-6 bg-[#d9c29c] p-3 rounded-full shadow-md text-xl">
        ←
     </a>
