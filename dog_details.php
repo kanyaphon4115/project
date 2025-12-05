@@ -73,16 +73,27 @@ $dog = $result->fetch_assoc();
     </div>
 
     <!-- BUTTONS -->
-    <div class="mt-8 flex gap-4">
-
-        <a href="adopt_form.php?dog_id=<?php echo $dog['id']; ?>"
-           class="bg-green-600 text-white px-6 py-2 rounded-xl font-semibold shadow-lg hover:bg-green-700 transition">
-           🐾 Adopt Me
-        </a>
-
+    <div class="mt-8 flex justify-center">
+    <a href="form.php?dog_id=<?php echo $dog['id']; ?>"
+   class="inline-block mx-auto bg-green-600 text-white px-14 py-3 rounded-xl font-bold shadow-lg hover:bg-green-700 transition">
+   🐾 Adopt Me
+</a>
     </div>
 
 </div>
+
+<!-- CHAT FLOATING BUTTON -->
+<a href="chat.php"
+   class="fixed bottom-6 right-6 bg-blue-600 w-14 h-14 rounded-full shadow-xl
+          flex items-center justify-center hover:bg-blue-700 transition duration-300">
+
+    <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" width="30" height="30">
+        <path d="M12 2C6.486 2 2 6.033 2 10.993c0 2.835 1.354 5.389 3.598 7.131V22l3.289-1.795c.993.276 2.042.429 3.113.429 
+                5.514 0 10-4.033 10-8.993S17.514 2 12 2zm1.066 12.596l-2.648-2.826-4.4 2.826 
+                4.84-5.173 2.648 2.826 4.4-2.826-4.84 5.173z"/>
+    </svg>
+
+</a>
 
 </body>
 </html>

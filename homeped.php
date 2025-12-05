@@ -95,7 +95,7 @@ $dogs = $con->query($sql);
         <ul class="flex items-center space-x-6 font-semibold text-gray-900 ml-auto">
             <li><a href="homeped.php" class="text-green-700 font-bold">HOME</a></li>
             <li><a href="form.php" class="hover:text-green-700">FORM</a></li>
-            <li><a href="#" class="hover:text-green-700">DONATE</a></li>
+            <li><a href="donate.php" class="hover:text-green-700">DONATE</a></li>
             <li><a href="#" class="hover:text-green-700">REQUEST STATUS</a></li>
 
             <!-- PROFILE -->

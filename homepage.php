@@ -75,7 +75,7 @@ if (isset($_SESSION['user_id'])) {
         <!-- MENU -->
         <ul class="flex items-center space-x-8 text-sm font-semibold text-gray-900 ml-auto mr-4">
             <li><a href="homeped.php" class="hover:text-green-700">HOME</a></li>
-            <li><a href="#" class="hover:text-green-700">FORM</a></li>
+            <li><a href="form.php" class="hover:text-green-700">FORM</a></li>
             <li><a href="#" class="hover:text-green-700">DONATE</a></li>
             <li><a href="#" class="hover:text-green-700">REQUEST STATUS</a></li>
 
@@ -139,7 +139,7 @@ if (isset($_SESSION['user_id'])) {
     </div>
 
     <div class="mt-8">
-        <a href="signup.php"
+        <a href="homeped.php"
         class="px-8 py-3 rounded-full bg-green-600 text-white font-semibold shadow-lg hover:bg-green-700 transition">
             Adopt Now
         </a>
