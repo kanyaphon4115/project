@@ -114,7 +114,7 @@ if (isset($_SESSION['user_id'])) {
                     <a href="#" class="block py-1">📄 บทความ</a>
 
                     <hr class="my-3">
-                    <a href="logout.php" class="text-red-600 font-bold">ออกจากระบบ</a>
+                    <a href="index.php" class="text-red-600 font-bold">ออกจากระบบ</a>
                 </div>
 
             </li>
@@ -134,56 +134,98 @@ if (isset($_SESSION['user_id'])) {
 
 
 <!-- FORM CONTENT -->
-<div class="max-w-lg mx-auto pt-28 px-4 pb-10">
+<div class="max-w-2xl mx-auto mt-32 mb-16 p-8 bg-white/70 backdrop-blur-lg shadow-xl rounded-2xl border border-[#f2d4a5]">
 
-    <h2 class="text-xl font-bold text-center text-gray-900">ฟอร์มประเมินความเหมาะสมของคุณ</h2>
-    <p class="text-center text-sm text-gray-700 mb-6">กรอกข้อมูลให้ครบถ้วน</p>
+    <!-- HEADER -->
+    <div class="text-center mb-8">
+        <h2 class="text-3xl font-extrabold text-[#2f5d31]">แบบฟอร์มสอบถามเพื่อรับเลี้ยงสุนัข</h2>
+        <p class="text-gray-700 mt-1">กรุณากรอกข้อมูลตามความจริงเพื่อให้เราประเมินความเหมาะสมของคุณ</p>
+    </div>
 
-    <form method="POST" action="save_form.php" class="space-y-5">
+    <form method="POST" action="save_form.php" class="space-y-6">
 
+        <!-- ชื่อ -->
         <div>
-            <label class="font-semibold text-sm text-gray-900">ชื่อ-นามสกุลของคุณ</label>
+            <label class="block font-semibold text-[#2f5d31] mb-1">ชื่อ-นามสกุล</label>
             <input type="text" name="fullname"
-                   class="w-full p-3 rounded-lg border mt-1" placeholder="ใส่คำตอบของคุณ">
+                class="w-full p-3 rounded-xl border bg-[#FAEED1] focus:ring-2 focus:ring-green-500 focus:outline-none"
+                placeholder="กรอกชื่อ-นามสกุลของคุณ">
         </div>
 
+        <!-- ที่อยู่ & เบอร์ติดต่อ -->
         <div>
-            <label class="font-semibold text-sm text-gray-900">ที่อยู่-เบอร์ติดต่อ</label>
+            <label class="block font-semibold text-[#2f5d31] mb-1">ที่อยู่ / เบอร์ติดต่อ</label>
             <input type="text" name="contact"
-                   class="w-full p-3 rounded-lg border mt-1" placeholder="ใส่คำตอบของคุณ">
+                class="w-full p-3 rounded-xl border bg-[#FAEED1] focus:ring-2 focus:ring-green-500"
+                placeholder="กรอกข้อมูลการติดต่อของคุณ">
         </div>
 
+        <!-- พื้นที่เลี้ยงดู -->
         <div>
-            <label class="font-semibold text-sm text-gray-900">พื้นที่การเลี้ยงดู</label>
-            <input type="text" name="area"
-                   class="w-full p-3 rounded-lg border mt-1" placeholder="ใส่คำตอบของคุณ">
+            <label class="block font-semibold text-[#2f5d31] mb-1">พื้นที่ในการเลี้ยงดู</label>
+            <textarea name="area"
+                class="w-full p-3 rounded-xl border bg-[#FAEED1] focus:ring-2 focus:ring-green-500"
+                placeholder="เช่น บ้านพร้อมรั้ว / ห้องเช่ามีพื้นที่จำกัด"></textarea>
         </div>
 
+        <!-- ประสบการณ์เลี้ยงสัตว์ -->
         <div>
-            <label class="font-semibold text-sm text-gray-900">สถานะการเป็นคนรับเลี้ยง</label>
-            <input type="text" name="status"
-                   class="w-full p-3 rounded-lg border mt-1" placeholder="ใส่คำตอบของคุณ">
+            <label class="block font-semibold text-[#2f5d31] mb-1">ประสบการณ์ในการเลี้ยงสัตว์</label>
+            <select name="experience"
+                class="w-full p-3 rounded-xl border bg-[#FAEED1] focus:ring-2 focus:ring-green-500">
+                <option value="">เลือกตัวเลือก</option>
+                <option value="ไม่มีประสบการณ์">ไม่มีประสบการณ์</option>
+                <option value="เคยเลี้ยงมาก่อน">เคยเลี้ยงมาก่อน</option>
+                <option value="กำลังเลี้ยงอยู่แล้ว">กำลังเลี้ยงสัตว์ในปัจจุบัน</option>
+            </select>
         </div>
 
+        <!-- ระยะเวลาอยู่บ้าน -->
         <div>
-            <label class="font-semibold text-sm text-gray-900">อายุของคุณ</label>
-            <input type="text" name="age"
-                   class="w-full p-3 rounded-lg border mt-1" placeholder="ใส่คำตอบของคุณ">
+            <label class="block font-semibold text-[#2f5d31] mb-1">คุณอยู่บ้านเฉลี่ยกี่ชั่วโมงต่อวัน?</label>
+            <input type="number" name="time_home"
+                class="w-full p-3 rounded-xl border bg-[#FAEED1] focus:ring-2 focus:ring-green-500"
+                placeholder="กรอกจำนวนชั่วโมง">
         </div>
 
+        <!-- เหตุผลที่ต้องการเลี้ยงสุนัข -->
         <div>
-            <label class="font-semibold text-sm text-gray-900">เวลาในการเลี้ยงดู</label>
-            <input type="text" name="time"
-                   class="w-full p-3 rounded-lg border mt-1" placeholder="ใส่คำตอบของคุณ">
+            <label class="block font-semibold text-[#2f5d31] mb-1">เหตุผลที่ต้องการรับเลี้ยงสุนัข</label>
+            <textarea name="reason"
+                class="w-full p-3 rounded-xl border bg-[#FAEED1] focus:ring-2 focus:ring-green-500"
+                placeholder="อธิบายเหตุผลของคุณอย่างชัดเจน"></textarea>
         </div>
 
-        <button class="w-full bg-green-600 text-white py-3 rounded-full mt-6 hover:bg-green-700 transition font-semibold">
-            ยืนยัน
+        <!-- สภาพครอบครัว -->
+        <div>
+            <label class="block font-semibold text-[#2f5d31] mb-1">สมาชิกในบ้านเห็นด้วยกับการรับเลี้ยงหรือไม่?</label>
+            <div class="flex gap-6 text-gray-800">
+                <label class="flex items-center gap-2">
+                    <input type="radio" name="family_agree" value="Yes" class="w-4 h-4"> เห็นด้วย
+                </label>
+                <label class="flex items-center gap-2">
+                    <input type="radio" name="family_agree" value="No" class="w-4 h-4"> ไม่เห็นด้วย
+                </label>
+            </div>
+        </div>
+
+        <!-- เวลาในการดูแล -->
+        <div>
+            <label class="block font-semibold text-[#2f5d31] mb-1">เวลาที่คุณสามารถให้สุนัขได้ต่อวัน</label>
+            <input type="text" name="care_time"
+                class="w-full p-3 rounded-xl border bg-[#FAEED1] focus:ring-2 focus:ring-green-500"
+                placeholder="เช่น เช้า–เย็น, วันหยุดมีเวลาเพิ่ม">
+        </div>
+
+        <!-- Submit -->
+        <button
+            class="w-full bg-green-600 text-white py-3 mt-5 rounded-full font-bold text-lg shadow hover:bg-green-700 transition">
+            ส่งแบบฟอร์ม
         </button>
 
     </form>
-
 </div>
+
 
 <script>
 // Click to open, hold to close

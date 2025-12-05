@@ -76,7 +76,7 @@ $dog = $result->fetch_assoc();
     <div class="mt-8 flex gap-4">
 
         <a href="adopt_form.php?dog_id=<?php echo $dog['id']; ?>"
-           class="flex-1 text-center bg-green-600 text-white py-3 rounded-xl text-lg font-semibold shadow-lg hover:bg-green-700 transition">
+           class="bg-green-600 text-white px-6 py-2 rounded-xl font-semibold shadow-lg hover:bg-green-700 transition">
            🐾 Adopt Me
         </a>
 
