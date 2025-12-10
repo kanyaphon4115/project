@@ -60,7 +60,10 @@ if (isset($_SESSION['user_id'])) {
 </style>
 </head>
 
-<body class="bg-gradient-to-b from-[#f7d7a3] to-[#efbf82] min-h-screen">
+<body class="min-h-screen bg-repeat relative" style="background-image: url('bg_pethome_pattern.jpg'); background-size: 300px;">
+
+<!-- ================= OVERLAY ทำให้พื้นหลังจางลง ================= -->
+<div class="absolute inset-0 bg-white/70 backdrop-blur-sm pointer-events-none"></div>
 
 <!-- ================= NAVBAR ================= -->
 <nav class="w-full fixed top-0 left-0 bg-white/40 backdrop-blur-md shadow-sm py-4 z-20">
@@ -76,8 +79,8 @@ if (isset($_SESSION['user_id'])) {
         <ul class="flex items-center space-x-8 text-sm font-semibold text-gray-900 ml-auto mr-4">
             <li><a href="homeped.php" class="hover:text-green-700">HOME</a></li>
             <li><a href="form.php" class="hover:text-green-700">FORM</a></li>
-            <li><a href="#" class="hover:text-green-700">DONATE</a></li>
-            <li><a href="#" class="hover:text-green-700">REQUEST STATUS</a></li>
+            <li><a href="donate.php" class="hover:text-green-700">DONATE</a></li>
+            <li><a href="request_status.php" class="hover:text-green-700">REQUEST STATUS</a></li>
 
             <?php if(isset($_SESSION['user_id'])): ?>
 
@@ -104,9 +107,9 @@ if (isset($_SESSION['user_id'])) {
 
                     <hr class="my-3">
 
-                    <a class="block py-2 hover:text-green-600">⚖️ น้ำหนักของฉัน</a>
-                    <a class="block py-2 hover:text-green-600">🏃 การออกกำลังกาย</a>
-                    <a class="block py-2 hover:text-green-600">📄 บทความ</a>
+                    <a href="#" class="block py-1 font-medium hover:text-red-600 transition">⚙️ ตั้งค่า</a>
+                    <a href="profile.php" class="block py-1 font-medium hover:text-red-600 transition">👤 โปรไฟล์</a>
+                    <a href="#" class="block py-1 font-medium hover:text-red-600 transition">ℹ️ About Us</a>
 
                     <hr class="my-3">
 
@@ -129,7 +132,7 @@ if (isset($_SESSION['user_id'])) {
 </nav>
 
 <!-- ================= CONTENT ================= -->
-<section class="flex flex-col items-center justify-center min-h-screen px-6 pt-24">
+<section class="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 pt-24">
 
     <img src="dog.png" class="w-44 h-44 mt-6 animate-[float_3s_ease-in-out_infinite]">
 

@@ -96,13 +96,13 @@ $dogs = $con->query($sql);
             <li><a href="homeped.php" class="text-green-700 font-bold">HOME</a></li>
             <li><a href="form.php" class="hover:text-green-700">FORM</a></li>
             <li><a href="donate.php" class="hover:text-green-700">DONATE</a></li>
-            <li><a href="#" class="hover:text-green-700">REQUEST STATUS</a></li>
+            <li><a href="request_status.php" class="hover:text-green-700">REQUEST STATUS</a></li>
 
             <!-- PROFILE -->
             <?php if(isset($_SESSION['user_id'])): ?>
-            <li class="relative group">
+            <li class="relative" id="profileMenu">
 
-                <button class="w-10 h-10 rounded-full bg-green-300 shadow-md overflow-hidden flex items-center justify-center">
+                <button id="profileBtn" type="button" class="w-10 h-10 rounded-full bg-green-300 shadow-md overflow-hidden flex items-center justify-center">
                     <?php if ($avatar_src): ?>
                         <img src="<?= $avatar_src ?>" class="w-full h-full object-cover">
                     <?php else: ?>
@@ -110,36 +110,28 @@ $dogs = $con->query($sql);
                     <?php endif; ?>
                 </button>
 
-                <!-- DROPDOWN -->
-                <div class="absolute right-0 mt-3 w-60 bg-white shadow-xl rounded-xl p-4 text-gray-700
-                            opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
+                <!-- DROPDOWN (JS-controlled) -->
+                <div id="profileDropdown" class="hidden absolute right-0 mt-3 w-60 bg-white shadow-xl rounded-xl p-4 text-gray-700 transition">
 
                     <p class="text-sm text-gray-500">เข้าสู่ระบบเป็น</p>
                     <p class="font-bold"><?= explode("@", $_SESSION['email'])[0]; ?></p>
                     <p class="text-sm"><?= $_SESSION['email']; ?></p>
 
-                    <hr class="my-3">
 
-                    <form method="POST" enctype="multipart/form-data">
-                        <label class="flex items-center gap-3 cursor-pointer bg-gray-100 p-2 rounded-lg hover:bg-gray-200">
-                            <div class="w-10 h-10 rounded-full overflow-hidden shadow">
-                                <?php if ($avatar_src): ?>
-                                    <img src="<?= $avatar_src ?>" class="w-full h-full object-cover">
-                                <?php else: ?>
-                                    <div class="w-full h-full bg-green-400 flex items-center justify-center text-white font-bold">
-                                        <?= strtoupper($_SESSION['email'][0]); ?>
-                                    </div>
-                                <?php endif; ?>
-                            </div>
-                            <span class="text-sm">เปลี่ยนรูปโปรไฟล์</span>
-                            <input type="file" name="avatar" class="hidden" onchange="this.form.submit()" accept="image/*">
-                        </label>
-                    </form>
+<hr class="my-3">
 
-                    <hr class="my-3">
-                    <a href="#" class="block py-1">⚖️ น้ำหนักของฉัน</a>
-                    <a href="#" class="block py-1">🏃 การออกกำลังกาย</a>
-                    <a href="#" class="block py-1">📄 บทความ</a>
+<a href="setting.php" class="block py-1 font-medium hover:text-red-600 transition">
+    ⚙️ ตั้งค่า
+</a>
+
+<a href="profile.php" class="block py-1 font-medium hover:text-red-600 transition">
+    👤 โปรไฟล์
+</a>
+
+<a href="about_us.php" class="block py-1 font-medium hover:text-red-600 transition">
+    ℹ️ About Us
+</a>
+
 
                     <hr class="my-3">
                     <a href="index.php" class="text-red-600 font-bold">ออกจากระบบ</a>
@@ -250,6 +242,69 @@ document.getElementById("openFilter").onclick = function() {
 document.getElementById("closeFilter").onclick = function() {
     document.getElementById("filterSidebar").classList.add("-translate-x-full");
 };
+
+// Profile dropdown: single-click open, hold to close
+document.addEventListener('DOMContentLoaded', function(){
+    var btn = document.getElementById('profileBtn');
+    var dropdown = document.getElementById('profileDropdown');
+    if (!btn || !dropdown) return;
+
+    var holdTimer = null;
+    var holdTime = 350; // ms
+    var isHolding = false;
+
+    function openDropdown(){
+        dropdown.classList.remove('hidden');
+    }
+    function closeDropdown(){
+        dropdown.classList.add('hidden');
+    }
+
+    // Single click to open
+    btn.addEventListener('click', function(e){
+        e.stopPropagation();
+        if (!isHolding) {
+            openDropdown();
+        }
+    });
+
+    // Hold to close
+    function startHold(e){
+        e.stopPropagation();
+        isHolding = true;
+        if (holdTimer) clearTimeout(holdTimer);
+        holdTimer = setTimeout(function(){
+            closeDropdown();
+            isHolding = false;
+            holdTimer = null;
+        }, holdTime);
+    }
+
+    function cancelHold(e){
+        if (holdTimer) { clearTimeout(holdTimer); holdTimer = null; }
+        isHolding = false;
+    }
+
+    // Mouse events
+    btn.addEventListener('mousedown', startHold);
+    btn.addEventListener('mouseup', cancelHold);
+    btn.addEventListener('mouseleave', cancelHold);
+
+    // Touch events
+    btn.addEventListener('touchstart', startHold, {passive: false});
+    btn.addEventListener('touchend', cancelHold);
+    btn.addEventListener('touchcancel', cancelHold);
+
+    // Keep dropdown open when interacting inside
+    dropdown.addEventListener('click', function(e){ e.stopPropagation(); });
+
+    // Close when clicking elsewhere
+    document.addEventListener('click', function(e){
+        if (!btn.contains(e.target) && !dropdown.contains(e.target)) {
+            closeDropdown();
+        }
+    });
+});
 </script>
 
 </body>

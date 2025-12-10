@@ -17,9 +17,12 @@
 </style>
 </head>
 
-<body class="bg-gradient-to-b from-[#f7d7a3] to-[#efbf82] min-h-screen">
+<body class="min-h-screen bg-repeat relative" style="background-image: url('bg_pethome_pattern.jpg'); background-size: 300px;">
 
-  <nav class="w-full fixed top-0 left-0 bg-white/40 backdrop-blur-md shadow-sm py-4 z-20">
+        <!-- ================= OVERLAY ทำให้พื้นหลังจางลง ================= -->
+        <div class="absolute inset-0 bg-white/70 backdrop-blur-sm pointer-events-none"></div>
+
+    <nav class="w-full fixed top-0 left-0 bg-white/40 backdrop-blur-md shadow-sm py-4 z-20">
     <div class="flex items-center px-6">
 
         <!-- LOGO -->
@@ -50,7 +53,7 @@
 
 
     <!-- CONTENT -->
-    <section class="flex flex-col items-center justify-center min-h-screen px-6 pt-24">
+    <section class="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 pt-24">
 
         <!-- PET IMAGE -->
         <img 

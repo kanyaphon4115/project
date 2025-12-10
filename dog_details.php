@@ -74,11 +74,11 @@ $dog = $result->fetch_assoc();
 
     <!-- BUTTONS -->
     <div class="mt-8 flex justify-center">
-    <a href="form.php?dog_id=<?php echo $dog['id']; ?>"
+<a href="request_status.php?add_dog=<?= $dog['id'] ?>"
    class="inline-block mx-auto bg-green-600 text-white px-14 py-3 rounded-xl font-bold shadow-lg hover:bg-green-700 transition">
    🐾 Adopt Me
 </a>
-    </div>
+
 
 </div>
 
