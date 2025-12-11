@@ -201,7 +201,6 @@ $res_forms = $con_forms->query("
     <p class="text-gray-700 mt-4">ตรวจสอบรายการสุนัขที่คุณขอรับเลี้ยง</p>
 </div>
 
-
 <!-- LIST -->
 <div class="max-w-3xl mx-auto mt-10 space-y-6 mb-24">
 
@@ -211,22 +210,40 @@ $res_forms = $con_forms->query("
         ยังไม่มีรายการรับเลี้ยง
     </div>
 
-<?php else: while ($f = $res_forms->fetch_assoc()):
+<?php else: 
+
+// ===============================
+// โหลดสถานะจาก JSON (ครั้งเดียว)
+// ===============================
+$status_file = "status.json";
+$status_list = [];
+
+if (file_exists($status_file)) {
+    $status_list = json_decode(file_get_contents($status_file), true);
+}
+
+// ===============================
+// แสดงรายการทีละรายการ
+// ===============================
+
+while ($f = $res_forms->fetch_assoc()):
 
     $dog_id = $f['dog_id'];
     $dog = $con_dogs->query("SELECT * FROM dogs WHERE id=$dog_id")->fetch_assoc();
 
     if (!$dog) continue;
 
-    // สี Badge ตามสถานะ
-    $status = $f["status"] ?? "Pending";
+    // โหลดสถานะ
+    $form_id = $f["id"];
+    $status = $status_list[$form_id] ?? "Pending";
+
     $badge_color = [
         "Pending"  => "bg-yellow-200 text-yellow-800",
         "Approved" => "bg-green-200 text-green-800",
         "Rejected" => "bg-red-200 text-red-800"
     ][$status];
-
 ?>
+
 <div class="bg-white shadow-md rounded-2xl p-5 flex gap-5 border border-[#e6d5b8] hover:shadow-xl transition duration-300">
 
     <img src="<?= $dog['image'] ?>" 
@@ -268,7 +285,6 @@ $res_forms = $con_forms->query("
 <?php endwhile; endif; ?>
 
 </div>
-
 <script>
 // Click to open, hold to close
 document.addEventListener('DOMContentLoaded', function(){
