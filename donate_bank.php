@@ -2,6 +2,7 @@
 session_start();
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 $con = new mysqli("localhost", "root", "", "pethome_donate");
 
 $bank_success = false;
@@ -32,6 +33,8 @@ if (isset($_POST['donate_bank_submit']) && isset($_FILES['slip'])) {
     }
 }
 
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
@@ -125,6 +128,7 @@ if (isset($_SESSION['user_id'])) {
                     <p class="text-sm"><?= $_SESSION['email']; ?></p>
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                     
                    
 <hr class="my-3">
@@ -141,6 +145,8 @@ if (isset($_SESSION['user_id'])) {
     ℹ️ About Us
 </a>
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 
@@ -167,6 +173,9 @@ if (isset($_SESSION['user_id'])) {
                     <a href="#" class="block py-1">🏃 การออกกำลังกาย</a>
                     <a href="#" class="block py-1">📄 บทความ</a>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -210,7 +219,11 @@ if (isset($_SESSION['user_id'])) {
             <p class="text-gray-700">ชื่อบัญชี: มูลนิธิช่วยเหลือสัตว์ PetHome</p>
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             <p class="text-xl font-bold text-green-700" id="bankNumber">0-538-12387-0</p>
+=======
+            <p class="text-xl font-bold text-green-700" id="bankNumber">123-456-7890</p>
+>>>>>>> Stashed changes
 =======
             <p class="text-xl font-bold text-green-700" id="bankNumber">123-456-7890</p>
 >>>>>>> Stashed changes
@@ -234,7 +247,11 @@ if (isset($_SESSION['user_id'])) {
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     <form id="bankDonateForm" method="POST" enctype="multipart/form-data" class="space-y-4">
+=======
+    <form method="POST" enctype="multipart/form-data" class="space-y-4">
+>>>>>>> Stashed changes
 =======
     <form method="POST" enctype="multipart/form-data" class="space-y-4">
 >>>>>>> Stashed changes
@@ -251,6 +268,7 @@ if (isset($_SESSION['user_id'])) {
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       <button type="submit" name="donate_bank_submit"
     class="bg-green-600 text-white w-full py-3 rounded-xl font-bold shadow hover:bg-green-700 transition">
     ส่งข้อมูล
@@ -258,11 +276,16 @@ if (isset($_SESSION['user_id'])) {
 =======
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
         <button type="submit"
             class="bg-green-600 text-white w-full py-3 rounded-xl font-bold shadow hover:bg-green-700 transition">
             ส่งข้อมูล
         </button>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -270,6 +293,7 @@ if (isset($_SESSION['user_id'])) {
     </form>
 </div>
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <!-- SUCCESS POPUP -->
@@ -290,6 +314,8 @@ if (isset($_SESSION['user_id'])) {
 =======
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 <!-- DOG IMAGE -->
 <div class="flex justify-center pb-10 relative z-10">
     <img src="dog.png" class="w-52 drop-shadow-lg">
@@ -297,6 +323,9 @@ if (isset($_SESSION['user_id'])) {
 
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -374,6 +403,7 @@ document.addEventListener('DOMContentLoaded', function(){
 </script>
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <!-- BOTTOM DOG IMAGE -->
 <div class="flex justify-center pb-10">
     <img src="familydogs.png" class="w-52 drop-shadow-lg">
@@ -393,6 +423,8 @@ function closePopup() {
 <?php if ($bank_success): ?>
 <script> showPopup(); </script>
 <?php endif; ?>
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======

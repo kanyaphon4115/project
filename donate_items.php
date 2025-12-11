@@ -2,6 +2,7 @@
 session_start();
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 $con = new mysqli("localhost", "root", "", "pethome_donate");
 if ($con->connect_errno) {
     die("เชื่อมต่อฐานข้อมูลล้มเหลว: " . $con->connect_error);
@@ -37,11 +38,16 @@ if (isset($_FILES['avatar']) && isset($_SESSION['user_id'])) {
 =======
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 
 // --- Handle avatar upload ---
 $upload_error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['avatar']) && isset($_SESSION['user_id'])) {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -65,9 +71,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['avatar']) && isset($
         if (move_uploaded_file($file['tmp_name'], $target_path)) {
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
            header("Location: ".$_SERVER['PHP_SELF']);
 exit;
 
+=======
+            header('Location: ' . $_SERVER['PHP_SELF']);
+            exit;
+>>>>>>> Stashed changes
 =======
             header('Location: ' . $_SERVER['PHP_SELF']);
             exit;
@@ -85,9 +96,13 @@ exit;
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 /* ---------------------
    โหลด Avatar
 ---------------------- */
+=======
+// โหลดรูปโปรไฟล์
+>>>>>>> Stashed changes
 =======
 // โหลดรูปโปรไฟล์
 >>>>>>> Stashed changes
@@ -105,7 +120,10 @@ if (isset($_SESSION['user_id'])) {
 ?>
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
@@ -122,7 +140,10 @@ if (isset($_SESSION['user_id'])) {
 </head>
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <body class="bg-[#f7d7a3] min-h-screen">
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
@@ -231,12 +252,15 @@ document.addEventListener('DOMContentLoaded', function(){
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
                     <hr class="my-3">
                     <a href="setting.php" class="block py-1 font-medium hover:text-red-600 transition">⚙️ ตั้งค่า</a>
                     <a href="profile.php" class="block py-1 font-medium hover:text-red-600 transition">👤 โปรไฟล์</a>
                     <a href="about_us.php" class="block py-1 font-medium hover:text-red-600 transition">ℹ️ About Us</a>
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
                     <hr class="my-3">
@@ -262,6 +286,9 @@ document.addEventListener('DOMContentLoaded', function(){
                     <a href="profile.php" class="block py-1 font-medium hover:text-red-600 transition">👤 โปรไฟล์</a>
                     <a href="#" class="block py-1 font-medium hover:text-red-600 transition">ℹ️ About Us</a>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -325,7 +352,11 @@ document.addEventListener('DOMContentLoaded', function(){
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <form id="donateForm" method="POST" class="space-y-6">
+=======
+    <form method="POST" class="space-y-6">
+>>>>>>> Stashed changes
 =======
     <form method="POST" class="space-y-6">
 >>>>>>> Stashed changes
@@ -361,7 +392,11 @@ document.addEventListener('DOMContentLoaded', function(){
                 <option>จัดส่งเองที่ศูนย์</option>
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                 <option>ส่งผ่าน Grab</option>
+=======
+                <option>ส่งผ่าน Grab / Lalamove</option>
+>>>>>>> Stashed changes
 =======
                 <option>ส่งผ่าน Grab / Lalamove</option>
 >>>>>>> Stashed changes
@@ -381,6 +416,7 @@ document.addEventListener('DOMContentLoaded', function(){
         <div class="flex justify-center">
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             <button type="submit" name="donate_submit"
         class="bg-green-600 text-white px-14 py-3 rounded-xl font-bold shadow-lg hover:bg-green-700 transition">
     ส่งข้อมูล
@@ -389,11 +425,16 @@ document.addEventListener('DOMContentLoaded', function(){
 =======
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
             <button type="submit"
                 class="bg-green-600 text-white px-14 py-3 rounded-xl font-bold shadow-lg hover:bg-green-700 transition">
                 ส่งข้อมูล
             </button>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -401,6 +442,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
     </form>
 </div>
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <!-- SUCCESS POPUP -->
@@ -419,11 +461,14 @@ document.addEventListener('DOMContentLoaded', function(){
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 
 <!-- BOTTOM DOG IMAGE -->
 <div class="flex justify-center pb-10">
     <img src="familydogs.png" class="w-52 drop-shadow-lg">
 </div>
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <script>
@@ -443,6 +488,8 @@ function closePopup() {
 showPopup();
 </script>
 <?php endif; ?>
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
