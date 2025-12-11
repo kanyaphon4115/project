@@ -1,9 +1,5 @@
 <?php 
 session_start();
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 $con = new mysqli("localhost", "root", "", "pethome_donate");
 
 $bank_success = false;
@@ -34,14 +30,6 @@ if (isset($_POST['donate_bank_submit']) && isset($_FILES['slip'])) {
     }
 }
 
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
 // --- Handle avatar upload ---
 $upload_error = '';
@@ -129,10 +117,6 @@ if (isset($_SESSION['user_id'])) {
                     <p class="text-sm text-gray-500">เข้าสู่ระบบเป็น</p>
                     <p class="font-bold"><?= explode("@", $_SESSION['email'])[0]; ?></p>
                     <p class="text-sm"><?= $_SESSION['email']; ?></p>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
                     
                    
 <hr class="my-3">
@@ -148,46 +132,6 @@ if (isset($_SESSION['user_id'])) {
 <a href="about_us.php" class="block py-1 font-medium hover:text-red-600 transition">
     ℹ️ About Us
 </a>
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-
-                    <hr class="my-3">
-
-                    <form method="POST" enctype="multipart/form-data">
-                        <label class="flex items-center gap-3 cursor-pointer bg-gray-100 p-2 rounded-lg hover:bg-gray-200">
-                            <div class="w-10 h-10 rounded-full overflow-hidden shadow">
-                                <?php if ($avatar_src): ?>
-                                    <img src="<?= $avatar_src ?>" class="w-full h-full object-cover">
-                                <?php else: ?>
-                                    <div class="w-full h-full bg-green-400 flex items-center justify-center text-white font-bold">
-                                        <?= strtoupper($_SESSION['email'][0]); ?>
-                                    </div>
-                                <?php endif; ?>
-                            </div>
-                            <span class="text-sm">เปลี่ยนรูปโปรไฟล์</span>
-                            <input type="file" name="avatar" class="hidden" onchange="this.form.submit()" accept="image/*">
-                        </label>
-                    </form>
-
-                    <hr class="my-3">
-                    <a href="#" class="block py-1">⚖️ น้ำหนักของฉัน</a>
-                    <a href="#" class="block py-1">🏃 การออกกำลังกาย</a>
-                    <a href="#" class="block py-1">📄 บทความ</a>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
                     <hr class="my-3">
                     <a href="index.php" class="text-red-600 font-bold">ออกจากระบบ</a>
@@ -226,23 +170,7 @@ if (isset($_SESSION['user_id'])) {
         <div>
             <p class="text-lg font-bold text-gray-800">ธนาคารไทยพาณิชย์</p>
             <p class="text-gray-700">ชื่อบัญชี: มูลนิธิช่วยเหลือสัตว์ PetHome</p>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
             <p class="text-xl font-bold text-green-700" id="bankNumber">0-538-12387-0</p>
-=======
-            <p class="text-xl font-bold text-green-700" id="bankNumber">123-456-7890</p>
->>>>>>> Stashed changes
-=======
-            <p class="text-xl font-bold text-green-700" id="bankNumber">123-456-7890</p>
->>>>>>> Stashed changes
-=======
-            <p class="text-xl font-bold text-green-700" id="bankNumber">123-456-7890</p>
->>>>>>> Stashed changes
-=======
-            <p class="text-xl font-bold text-green-700" id="bankNumber">123-456-7890</p>
->>>>>>> Stashed changes
         </div>
     </div>
 
@@ -258,23 +186,7 @@ if (isset($_SESSION['user_id'])) {
 
     <h3 class="text-xl font-extrabold text-[#2f5d31] mb-4">อัปโหลดสลิปการโอนเงิน</h3>
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     <form id="bankDonateForm" method="POST" enctype="multipart/form-data" class="space-y-4">
-=======
-    <form method="POST" enctype="multipart/form-data" class="space-y-4">
->>>>>>> Stashed changes
-=======
-    <form method="POST" enctype="multipart/form-data" class="space-y-4">
->>>>>>> Stashed changes
-=======
-    <form method="POST" enctype="multipart/form-data" class="space-y-4">
->>>>>>> Stashed changes
-=======
-    <form method="POST" enctype="multipart/form-data" class="space-y-4">
->>>>>>> Stashed changes
 
         <input type="file" name="slip"
             class="w-full p-3 bg-[#FAEED1] border rounded-xl">
@@ -283,43 +195,14 @@ if (isset($_SESSION['user_id'])) {
             class="w-full p-3 bg-[#FAEED1] border rounded-xl"
             placeholder="ชื่อผู้บริจาค">
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
       <button type="submit" name="donate_bank_submit"
     class="bg-green-600 text-white w-full py-3 rounded-xl font-bold shadow hover:bg-green-700 transition">
     ส่งข้อมูล
 </button>
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-        <button type="submit"
-            class="bg-green-600 text-white w-full py-3 rounded-xl font-bold shadow hover:bg-green-700 transition">
-            ส่งข้อมูล
-        </button>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
     </form>
 </div>
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 <!-- SUCCESS POPUP -->
 <div id="successPopup" class="fixed inset-0 hidden bg-black/50 flex items-center justify-center z-50">
     <div class="bg-white w-80 p-8 rounded-xl text-center shadow-xl">
@@ -335,29 +218,6 @@ if (isset($_SESSION['user_id'])) {
 
 
 
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-<!-- DOG IMAGE -->
-<div class="flex justify-center pb-10 relative z-10">
-    <img src="dog.png" class="w-52 drop-shadow-lg">
-</div>
-
-
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 <script>
 function copyBank() {
     const text = document.getElementById("bankNumber").innerText;
@@ -430,10 +290,6 @@ document.addEventListener('DOMContentLoaded', function(){
     });
 });
 </script>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 <!-- BOTTOM DOG IMAGE -->
 <div class="flex justify-center pb-10">
     <img src="familydogs.png" class="w-52 drop-shadow-lg">
@@ -453,14 +309,6 @@ function closePopup() {
 <?php if ($bank_success): ?>
 <script> showPopup(); </script>
 <?php endif; ?>
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
 </body>
 </html>
