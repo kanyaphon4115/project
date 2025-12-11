@@ -83,6 +83,7 @@ if (isset($_SESSION['user_id'])) {
     body { font-family: 'Prompt', sans-serif; }
 </style>
 </head>
+<body class="bg-[#f7d7a3] min-h-screen">
 
 <script>
 // Click to open, hold to close for profile dropdown

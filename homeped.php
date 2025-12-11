@@ -56,6 +56,20 @@ if (!empty($filter_breed)) {
     $b = "'" . implode("','", $filter_breed) . "'";
     $sql .= " AND breed IN ($b)";
 }
+// ---------------- PAGINATION -----------------
+$limit = 6; // จำนวนสุนัขต่อหน้า
+$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+$start = ($page - 1) * $limit;
+
+// หาจำนวนข้อมูลทั้งหมด
+$count_result = $con->query("SELECT COUNT(*) AS total FROM dogs");
+$total_dogs = $count_result->fetch_assoc()['total'];
+
+// คำนวณจำนวนหน้า
+$total_pages = ceil($total_dogs / $limit);
+
+// เพิ่ม LIMIT เข้า SQL เดิม
+$sql .= " LIMIT $start, $limit";
 
 $dogs = $con->query($sql);
 ?>
@@ -175,7 +189,31 @@ $dogs = $con->query($sql);
     </div>
 
 </div>
+<!-- PAGINATION -->
+<div class="flex justify-center mt-8 space-x-2">
 
+    <!-- Previous -->
+    <?php if ($page > 1): ?>
+        <a href="?page=<?= $page-1 ?>" 
+           class="px-3 py-1 bg-white border rounded-lg hover:bg-gray-200">Previous</a>
+    <?php endif; ?>
+
+    <!-- Page Numbers -->
+    <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+        <a href="?page=<?= $i ?>"
+           class="px-3 py-1 border rounded-lg 
+           <?= ($i == $page) ? 'bg-blue-500 text-white' : 'bg-white hover:bg-gray-200' ?>">
+           <?= $i ?>
+        </a>
+    <?php endfor; ?>
+
+    <!-- Next -->
+    <?php if ($page < $total_pages): ?>
+        <a href="?page=<?= $page+1 ?>" 
+           class="px-3 py-1 bg-white border rounded-lg hover:bg-gray-200">Next</a>
+    <?php endif; ?>
+
+</div>
 <!-- FILTER SIDEBAR -->
 <div id="filterSidebar"
      class="fixed top-0 left-0 w-80 h-full bg-white shadow-2xl transform -translate-x-full
