@@ -1,5 +1,6 @@
 <?php 
 session_start();
+<<<<<<< Updated upstream
 $con = new mysqli("localhost", "root", "", "pethome_donate");
 if ($con->connect_errno) {
     die("เชื่อมต่อฐานข้อมูลล้มเหลว: " . $con->connect_error);
@@ -32,6 +33,12 @@ $upload_error = '';
 
 if (isset($_FILES['avatar']) && isset($_SESSION['user_id'])) {
 
+=======
+
+// --- Handle avatar upload ---
+$upload_error = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['avatar']) && isset($_SESSION['user_id'])) {
+>>>>>>> Stashed changes
     $user_id = intval($_SESSION['user_id']);
     $allowed_types = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
     $file = $_FILES['avatar'];
@@ -50,9 +57,14 @@ if (isset($_FILES['avatar']) && isset($_SESSION['user_id'])) {
         }
 
         if (move_uploaded_file($file['tmp_name'], $target_path)) {
+<<<<<<< Updated upstream
            header("Location: ".$_SERVER['PHP_SELF']);
 exit;
 
+=======
+            header('Location: ' . $_SERVER['PHP_SELF']);
+            exit;
+>>>>>>> Stashed changes
         }
 
     } else {
@@ -60,9 +72,13 @@ exit;
     }
 }
 
+<<<<<<< Updated upstream
 /* ---------------------
    โหลด Avatar
 ---------------------- */
+=======
+// โหลดรูปโปรไฟล์
+>>>>>>> Stashed changes
 $avatar_src = null;
 if (isset($_SESSION['user_id'])) {
     $uid = intval($_SESSION['user_id']);
@@ -72,7 +88,10 @@ if (isset($_SESSION['user_id'])) {
     }
 }
 ?>
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -83,7 +102,10 @@ if (isset($_SESSION['user_id'])) {
     body { font-family: 'Prompt', sans-serif; }
 </style>
 </head>
+<<<<<<< Updated upstream
 <body class="bg-[#f7d7a3] min-h-screen">
+=======
+>>>>>>> Stashed changes
 
 <script>
 // Click to open, hold to close for profile dropdown
@@ -186,11 +208,36 @@ document.addEventListener('DOMContentLoaded', function(){
                     <p class="font-bold"><?= explode("@", $_SESSION['email'])[0]; ?></p>
                     <p class="text-sm"><?= $_SESSION['email']; ?></p>
 
+<<<<<<< Updated upstream
 
                     <hr class="my-3">
                     <a href="setting.php" class="block py-1 font-medium hover:text-red-600 transition">⚙️ ตั้งค่า</a>
                     <a href="profile.php" class="block py-1 font-medium hover:text-red-600 transition">👤 โปรไฟล์</a>
                     <a href="about_us.php" class="block py-1 font-medium hover:text-red-600 transition">ℹ️ About Us</a>
+=======
+                    <hr class="my-3">
+
+                    <form method="POST" enctype="multipart/form-data">
+                        <label class="flex items-center gap-3 cursor-pointer bg-gray-100 p-2 rounded-lg hover:bg-gray-200">
+                            <div class="w-10 h-10 rounded-full overflow-hidden shadow">
+                                <?php if ($avatar_src): ?>
+                                    <img src="<?= $avatar_src ?>" class="w-full h-full object-cover">
+                                <?php else: ?>
+                                    <div class="w-full h-full bg-green-400 flex items-center justify-center text-white font-bold">
+                                        <?= strtoupper($_SESSION['email'][0]); ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                            <span class="text-sm">เปลี่ยนรูปโปรไฟล์</span>
+                            <input type="file" name="avatar" class="hidden" onchange="this.form.submit()" accept="image/*">
+                        </label>
+                    </form>
+
+                    <hr class="my-3">
+                    <a href="#" class="block py-1 font-medium hover:text-red-600 transition">⚙️ ตั้งค่า</a>
+                    <a href="profile.php" class="block py-1 font-medium hover:text-red-600 transition">👤 โปรไฟล์</a>
+                    <a href="#" class="block py-1 font-medium hover:text-red-600 transition">ℹ️ About Us</a>
+>>>>>>> Stashed changes
 
                     <hr class="my-3">
                     <a href="index.php" class="text-red-600 font-bold">ออกจากระบบ</a>
@@ -249,7 +296,11 @@ document.addEventListener('DOMContentLoaded', function(){
 
     <h3 class="text-2xl font-extrabold text-[#2f5d31] text-center mb-6">กรอกข้อมูลการส่งของบริจาค</h3>
 
+<<<<<<< Updated upstream
 <form id="donateForm" method="POST" class="space-y-6">
+=======
+    <form method="POST" class="space-y-6">
+>>>>>>> Stashed changes
 
         <div>
             <label class="block font-semibold text-[#2f5d31] mb-1">ชื่อ-นามสกุล</label>
@@ -277,7 +328,11 @@ document.addEventListener('DOMContentLoaded', function(){
                 <option value="">เลือกวิธีจัดส่ง</option>
                 <option>ส่งทางไปรษณีย์</option>
                 <option>จัดส่งเองที่ศูนย์</option>
+<<<<<<< Updated upstream
                 <option>ส่งผ่าน Grab</option>
+=======
+                <option>ส่งผ่าน Grab / Lalamove</option>
+>>>>>>> Stashed changes
             </select>
         </div>
 
@@ -289,15 +344,23 @@ document.addEventListener('DOMContentLoaded', function(){
         </div>
 
         <div class="flex justify-center">
+<<<<<<< Updated upstream
             <button type="submit" name="donate_submit"
         class="bg-green-600 text-white px-14 py-3 rounded-xl font-bold shadow-lg hover:bg-green-700 transition">
     ส่งข้อมูล
 </button>
 
+=======
+            <button type="submit"
+                class="bg-green-600 text-white px-14 py-3 rounded-xl font-bold shadow-lg hover:bg-green-700 transition">
+                ส่งข้อมูล
+            </button>
+>>>>>>> Stashed changes
         </div>
 
     </form>
 </div>
+<<<<<<< Updated upstream
 <!-- SUCCESS POPUP -->
 <div id="successPopup" class="fixed inset-0 hidden bg-black/50 flex items-center justify-center z-50">
     <div class="bg-white w-80 p-8 rounded-xl text-center shadow-xl">
@@ -310,11 +373,14 @@ document.addEventListener('DOMContentLoaded', function(){
         </button>
     </div>
 </div>
+=======
+>>>>>>> Stashed changes
 
 <!-- BOTTOM DOG IMAGE -->
 <div class="flex justify-center pb-10">
     <img src="familydogs.png" class="w-52 drop-shadow-lg">
 </div>
+<<<<<<< Updated upstream
 <script>
 // เปิด Popup
 function showPopup() {
@@ -332,6 +398,8 @@ function closePopup() {
 showPopup();
 </script>
 <?php endif; ?>
+=======
+>>>>>>> Stashed changes
 
 </body>
 </html>
