@@ -212,15 +212,6 @@ $res_forms = $con_forms->query("
 
 <?php else: 
 
-// ===============================
-// โหลดสถานะจาก JSON (ครั้งเดียว)
-// ===============================
-$status_file = "status.json";
-$status_list = [];
-
-if (file_exists($status_file)) {
-    $status_list = json_decode(file_get_contents($status_file), true);
-}
 
 // ===============================
 // แสดงรายการทีละรายการ
@@ -233,7 +224,15 @@ while ($f = $res_forms->fetch_assoc()):
 
     if (!$dog) continue;
 
-    // โหลดสถานะ
+    // โหลดสถานะจาก JSON
+$status_file = "admin/status.json";
+    $status_list = [];
+
+    if (file_exists($status_file)) {
+        $status_list = json_decode(file_get_contents($status_file), true);
+    }
+
+    // สถานะปัจจุบัน
     $form_id = $f["id"];
     $status = $status_list[$form_id] ?? "Pending";
 
@@ -242,6 +241,7 @@ while ($f = $res_forms->fetch_assoc()):
         "Approved" => "bg-green-200 text-green-800",
         "Rejected" => "bg-red-200 text-red-800"
     ][$status];
+
 ?>
 
 <div class="bg-white shadow-md rounded-2xl p-5 flex gap-5 border border-[#e6d5b8] hover:shadow-xl transition duration-300">

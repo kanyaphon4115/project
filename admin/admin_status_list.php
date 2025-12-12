@@ -5,7 +5,7 @@ $con = new mysqli("localhost", "root", "", "adopt_forms");
 $res = $con->query("SELECT * FROM adopt_forms ORDER BY id DESC");
 
 // โหลดสถานะจาก JSON
-$status_file = "status.json";
+$status_file = __DIR__ . "/status.json";
 $status_list = file_exists($status_file) ? json_decode(file_get_contents($status_file), true) : [];
 ?>
 <!DOCTYPE html>
