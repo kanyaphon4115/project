@@ -107,9 +107,9 @@ if (isset($_SESSION['user_id'])) {
 
                     <hr class="my-3">
 
-                    <a href="#" class="block py-1 font-medium hover:text-red-600 transition">⚙️ ตั้งค่า</a>
+                    <a href="setting.php" class="block py-1 font-medium hover:text-red-600 transition">⚙️ ตั้งค่า</a>
                     <a href="profile.php" class="block py-1 font-medium hover:text-red-600 transition">👤 โปรไฟล์</a>
-                    <a href="#" class="block py-1 font-medium hover:text-red-600 transition">ℹ️ About Us</a>
+                    <a href="about_us.php" class="block py-1 font-medium hover:text-red-600 transition">ℹ️ About Us</a>
 
                     <hr class="my-3">
 
@@ -134,7 +134,8 @@ if (isset($_SESSION['user_id'])) {
 <!-- ================= CONTENT ================= -->
 <section class="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 pt-24">
 
-    <img src="dog.png" class="w-44 h-44 mt-6 animate-[float_3s_ease-in-out_infinite]">
+    <img src="dog4.png" class="w-56 h-56 mt-6 object-contain mx-auto 
+           animate-[float_3s_ease-in-out_infinite]">
 
     <div class="text-center mt-8">
         <h2 class="text-3xl font-black text-gray-900 tracking-wide">Make A New Friends</h2>

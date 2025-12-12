@@ -97,25 +97,46 @@ if (isset($_GET['delete_id'])) {
     exit;
 }
 
-
-// ===============================
 // 3. โหลด avatar
-// ===============================
+
 $avatar_src = null;
 $match = glob(__DIR__ . "/uploads/avatar_user_$user_id.*");
 if (!empty($match)) {
     $avatar_src = "uploads/" . basename($match[0]);
 }
-
-
 // ===============================
-// 4. โหลดรายการสุนัขทั้งหมดที่เลือก
+// 4. Pagination (แสดง 5 รายการต่อหน้า)
 // ===============================
+
+// จำนวนที่ต้องการให้แสดงต่อหน้า
+$limit = 5;
+
+// หน้านี้คือหน้าอะไร เช่น page=2
+$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+if ($page < 1) $page = 1;
+
+// ตำแหน่งเริ่มดึงข้อมูล
+$start = ($page - 1) * $limit;
+
+// นับจำนวนข้อมูลทั้งหมดของผู้ใช้คนนี้
+$count_res = $con_forms->query("
+    SELECT COUNT(*) AS total 
+    FROM adopt_forms 
+    WHERE user_id = $user_id
+");
+$total_rows = $count_res->fetch_assoc()['total'];
+
+// คำนวณจำนวนหน้าทั้งหมด
+$total_pages = ceil($total_rows / $limit);
+
+// Query ดึงข้อมูลแบบแบ่งหน้า
 $res_forms = $con_forms->query("
     SELECT * FROM adopt_forms 
     WHERE user_id=$user_id 
     ORDER BY id DESC
+    LIMIT $start, $limit
 ");
+
 
 ?>
 <!DOCTYPE html>
@@ -168,9 +189,9 @@ $res_forms = $con_forms->query("
                     <p class="text-sm"><?= $_SESSION['email']; ?></p>
 
                     <hr class="my-3">
-                    <a href="#" class="block py-1 font-medium hover:text-red-600 transition">⚙️ ตั้งค่า</a>
+                    <a href="setting.php" class="block py-1 font-medium hover:text-red-600 transition">⚙️ ตั้งค่า</a>
                     <a href="profile.php" class="block py-1 font-medium hover:text-red-600 transition">👤 โปรไฟล์</a>
-                    <a href="#" class="block py-1 font-medium hover:text-red-600 transition">ℹ️ About Us</a>
+                    <a href="about_us.php" class="block py-1 font-medium hover:text-red-600 transition">ℹ️ About Us</a>
 
                     <hr class="my-3">
                     <a href="index.php" class="text-red-600 font-bold">ออกจากระบบ</a>
@@ -213,10 +234,7 @@ $res_forms = $con_forms->query("
 <?php else: 
 
 
-// ===============================
 // แสดงรายการทีละรายการ
-// ===============================
-
 while ($f = $res_forms->fetch_assoc()):
 
     $dog_id = $f['dog_id'];
@@ -285,6 +303,49 @@ $status_file = "admin/status.json";
 <?php endwhile; endif; ?>
 
 </div>
+<!-- PAGINATION -->
+<div class="flex justify-center mt-10 space-x-2">
+
+    <?php
+    // ตั้งจำนวนหน้าที่ต้องการให้แสดง
+    $show = 3;
+
+    // คำนวณจุดเริ่ม – จบ
+    $start_page = max(1, $page - floor($show/2));
+    $end_page = min($total_pages, $start_page + $show - 1);
+
+    // ถ้าจำนวนหน้ารวมยังไม่ถึง 3 ให้ปรับใหม่
+    if ($end_page - $start_page + 1 < $show) {
+        $start_page = max(1, $end_page - $show + 1);
+    }
+    ?>
+
+    <!-- ปุ่ม Prev -->
+    <?php if ($page > 1): ?>
+        <a href="?page=<?= $page-1 ?>" 
+           class="px-3 py-1 bg-white border rounded-lg hover:bg-gray-200">Previous</a>
+    <?php endif; ?>
+
+
+    <!-- ปุ่มหมายเลข -->
+    <?php for ($i = $start_page; $i <= $end_page; $i++): ?>
+        <a href="?page=<?= $i ?>" 
+           class="px-3 py-1 rounded 
+           <?= $page == $i ? 'bg-blue-500 text-white' : 'bg-white border' ?>">
+           <?= $i ?>
+        </a>
+    <?php endfor; ?>
+
+
+    <!-- ปุ่ม Next -->
+    <?php if ($page < $total_pages): ?>
+        <a href="?page=<?= $page+1 ?>" 
+           class="px-3 py-1 bg-white border rounded-lg hover:bg-gray-200">Next</a>
+    <?php endif; ?>
+
+</div>
+
+
 <script>
 // Click to open, hold to close
 document.addEventListener('DOMContentLoaded', function(){

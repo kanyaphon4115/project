@@ -65,9 +65,9 @@ if (isset($_SESSION['user_id'])) {
 
                     <hr class="my-3">
 
-                    <a href="#" class="block py-1 font-medium hover:text-red-600 transition">⚙️ ตั้งค่า</a>
+                    <a href="setting.php" class="block py-1 font-medium hover:text-red-600 transition">⚙️ ตั้งค่า</a>
                     <a href="profile.php" class="block py-1 font-medium hover:text-red-600 transition">👤 โปรไฟล์</a>
-                    <a href="#" class="block py-1 font-medium hover:text-red-600 transition">ℹ️ About Us</a>
+                    <a href="about_us.php" class="block py-1 font-medium hover:text-red-600 transition">ℹ️ About Us</a>
 
                     <hr class="my-3">
                     <a href="index.php" class="text-red-600 font-bold">ออกจากระบบ</a>
@@ -119,7 +119,7 @@ if (isset($_SESSION['user_id'])) {
 
 <!-- ============= DOG ILLUSTRATION ============= -->
 <div class="flex justify-center mt-16 relative z-10">
-    <img src="dog.png" class="w-52 drop-shadow-xl hover:scale-105 transition">
+    <img src="dog3.png" class="w-52 drop-shadow-xl hover:scale-105 transition">
 </div>
 
 <script>

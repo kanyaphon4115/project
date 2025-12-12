@@ -55,12 +55,14 @@
     <!-- CONTENT -->
     <section class="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 pt-24">
 
-        <!-- PET IMAGE -->
-        <img 
-            src="dog.png" 
-            alt="pet" 
-            class="w-44 h-44 mt-6 animate-[float_3s_ease-in-out_infinite]"
-        >
+    <!-- PET IMAGE -->
+<img 
+    src="dog4.png"
+    alt="pet"
+    class="w-56 h-56 mt-6 object-contain mx-auto 
+           animate-[float_3s_ease-in-out_infinite]"
+>
+
 
         <!-- TEXT -->
         <div class="text-center mt-8">

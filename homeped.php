@@ -146,7 +146,6 @@ $dogs = $con->query($sql);
     ℹ️ About Us
 </a>
 
-
                     <hr class="my-3">
                     <a href="index.php" class="text-red-600 font-bold">ออกจากระบบ</a>
                 </div>
@@ -190,30 +189,46 @@ $dogs = $con->query($sql);
 
 </div>
 <!-- PAGINATION -->
-<div class="flex justify-center mt-8 space-x-2">
+<div class="flex justify-center mt-10 space-x-2">
 
-    <!-- Previous -->
+    <?php
+    // ตั้งจำนวนหน้าที่ต้องการให้แสดง
+    $show = 3;
+
+    // คำนวณจุดเริ่ม – จบ
+    $start_page = max(1, $page - floor($show/2));
+    $end_page = min($total_pages, $start_page + $show - 1);
+
+    // ถ้าจำนวนหน้ารวมยังไม่ถึง 3 ให้ปรับใหม่
+    if ($end_page - $start_page + 1 < $show) {
+        $start_page = max(1, $end_page - $show + 1);
+    }
+    ?>
+
+    <!-- ปุ่ม Prev -->
     <?php if ($page > 1): ?>
         <a href="?page=<?= $page-1 ?>" 
            class="px-3 py-1 bg-white border rounded-lg hover:bg-gray-200">Previous</a>
     <?php endif; ?>
 
-    <!-- Page Numbers -->
-    <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-        <a href="?page=<?= $i ?>"
-           class="px-3 py-1 border rounded-lg 
-           <?= ($i == $page) ? 'bg-blue-500 text-white' : 'bg-white hover:bg-gray-200' ?>">
+
+    <!-- ปุ่มหมายเลข -->
+    <?php for ($i = $start_page; $i <= $end_page; $i++): ?>
+        <a href="?page=<?= $i ?>" 
+           class="px-3 py-1 rounded 
+           <?= $page == $i ? 'bg-blue-500 text-white' : 'bg-white border' ?>">
            <?= $i ?>
         </a>
     <?php endfor; ?>
 
-    <!-- Next -->
+<!-- ปุ่ม Next -->
     <?php if ($page < $total_pages): ?>
         <a href="?page=<?= $page+1 ?>" 
            class="px-3 py-1 bg-white border rounded-lg hover:bg-gray-200">Next</a>
     <?php endif; ?>
 
 </div>
+
 <!-- FILTER SIDEBAR -->
 <div id="filterSidebar"
      class="fixed top-0 left-0 w-80 h-full bg-white shadow-2xl transform -translate-x-full
@@ -229,8 +244,8 @@ $dogs = $con->query($sql);
         <!-- Gender -->
         <div>
             <p class="font-semibold mb-2">เพศ</p>
-            <label class="flex gap-2"><input type="checkbox" name="gender[]" value="Male"> ชาย</label>
-            <label class="flex gap-2"><input type="checkbox" name="gender[]" value="Female"> หญิง</label>
+            <label class="flex gap-2"><input type="checkbox" name="gender[]" value="Male"> เพศผู้</label>
+            <label class="flex gap-2"><input type="checkbox" name="gender[]" value="Female"> เพศเมีย</label>
         </div>
 
         <!-- Age -->

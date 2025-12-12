@@ -319,7 +319,7 @@ if (isset($_SESSION['profile_message'])) {
 
 <!-- FOOTER DOG IMAGE -->
 <div class="flex justify-center pb-10">
-    <img src="dog.png" class="w-52 drop-shadow-lg">
+    <img src="dog3.png" class="w-52 drop-shadow-lg">
 </div>
 
 <script>
