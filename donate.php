@@ -15,7 +15,7 @@ if (isset($_SESSION['user_id'])) {
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<title>Donate - PetHome</title>
+<title>Donate - PawHome</title>
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
@@ -35,7 +35,7 @@ if (isset($_SESSION['user_id'])) {
 
         <h1 class="flex items-center gap-3 text-2xl font-extrabold text-[#2f5d31]">
             <div class="bg-white rounded-full shadow-md p-1 px-2">🐾</div>
-            PetHome
+            PawHome
         </h1>
 
         <ul class="flex items-center space-x-6 text-gray-900 ml-auto">

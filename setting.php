@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<title>Settings - PetHome</title>
+<title>Settings - PawHome</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://cdn.tailwindcss.com"></script>
 <style> body { font-family: 'Prompt', sans-serif; } </style>
@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
 <nav class="fixed top-0 left-0 w-full bg-white/40 backdrop-blur-md shadow-md py-4 z-20">
     <div class="flex items-center justify-between px-6">
         <h1 class="text-2xl font-extrabold text-[#2f5d31] flex items-center gap-2">
-            <span class="bg-white rounded-full shadow px-2">🐾</span> PetHome
+            <span class="bg-white rounded-full shadow px-2">🐾</span> PawHome
         </h1>
 
         <a href="homeped.php" class="text-gray-800 hover:text-green-700 font-medium">กลับหน้าแรก</a>

@@ -77,7 +77,7 @@ if (isset($_SESSION['user_id'])) {
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<title>Donate Items - PetHome</title>
+<title>Donate Items - PawHome</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
     body { font-family: 'Prompt', sans-serif; }
@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
         <h1 class="flex items-center gap-3 text-2xl font-extrabold text-[#2f5d31]">
             <div class="bg-white rounded-full shadow-md p-1 px-2">🐾</div>
-            PetHome
+            PawHome
         </h1>
 
         <ul class="flex items-center space-x-6 text-gray-900 ml-auto font-medium">
@@ -284,7 +284,7 @@ document.addEventListener('DOMContentLoaded', function(){
         <div>
             <label class="block font-semibold text-[#2f5d31] mb-1">ที่อยู่ศูนย์รับบริจาค</label>
             <input type="text" readonly
-                value="ศูนย์ช่วยเหลือสัตว์ PetHome - ถนนสุขใจ กรุงเทพฯ"
+                value="ศูนย์ช่วยเหลือสัตว์ PawHome - ถนนสุขใจ กรุงเทพฯ"
                 class="w-full p-3 rounded-xl border bg-gray-100 font-semibold">
         </div>
 

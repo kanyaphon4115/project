@@ -73,7 +73,7 @@ function inputValue($form, $field) {
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<title>PetHome - Form</title>
+<title>PawHome - Form</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
     body { font-family: 'Prompt', sans-serif; }
@@ -89,7 +89,7 @@ function inputValue($form, $field) {
         <!-- LOGO -->
         <h1 class="flex items-center gap-3 text-2xl font-extrabold text-[#2f5d31]">
             <div class="bg-white rounded-full shadow p-1 px-2">🐾</div>
-            PetHome
+            PawHome
         </h1>
 
         <!-- MENU -->

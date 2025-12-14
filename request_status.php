@@ -143,7 +143,7 @@ $res_forms = $con_forms->query("
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<title>Request Status - PetHome</title>
+<title>Request Status - PawHome</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
     body { font-family: 'Prompt', sans-serif; }
@@ -159,7 +159,7 @@ $res_forms = $con_forms->query("
         <!-- LOGO -->
         <h1 class="flex items-center gap-3 text-2xl font-extrabold text-[#2f5d31]">
             <div class="bg-white rounded-full shadow-md p-1 px-2">🐾</div>
-            PetHome
+            PawHome
         </h1>
 
         <!-- MENU -->
@@ -213,14 +213,23 @@ $res_forms = $con_forms->query("
 
 <div class="pt-28"></div>
 
-<!-- HEADER -->
 <div class="text-center">
-    <div class="bg-white rounded-3xl w-56 mx-auto p-5 shadow">
+    <div class="bg-white rounded-3xl w-64 mx-auto p-5 shadow">
         <div class="text-4xl">📋</div>
-        <p class="text-2xl font-bold text-[#2f5d31]">สถานะคำขอรับเลี้ยง</p>
+
+        <p class="text-2xl font-bold text-[#2f5d31] whitespace-nowrap">
+            สถานะคำขอรับเลี้ยง
+        </p>
+
     </div>
-    <p class="text-gray-700 mt-4">ตรวจสอบรายการสุนัขที่คุณขอรับเลี้ยง</p>
+
+    <p class="text-gray-700 mt-4 text-xl">
+    ตรวจสอบรายการสุนัขที่คุณขอรับเลี้ยง
+</p>
+
 </div>
+
+
 
 <!-- LIST -->
 <div class="max-w-3xl mx-auto mt-10 space-y-6 mb-24">

@@ -18,7 +18,7 @@ if (isset($_SESSION['user_id'])) {
 <html lang="th">
 <head>
     <meta charset="utf-8">
-    <title>About Us - PetHome</title>
+    <title>About Us - PawHome</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>body{font-family:'Prompt',sans-serif}</style>
@@ -28,7 +28,7 @@ if (isset($_SESSION['user_id'])) {
 <!-- Navbar -->
 <nav class="w-full fixed top-0 left-0 bg-white/40 backdrop-blur-md shadow-sm py-4 z-20">
     <div class="flex items-center px-6">
-        <h1 class="flex items-center gap-3 text-2xl font-extrabold text-[#2f5d31]"><div class="bg-white rounded-full shadow-md p-1 px-2">🐾</div>PetHome</h1>
+        <h1 class="flex items-center gap-3 text-2xl font-extrabold text-[#2f5d31]"><div class="bg-white rounded-full shadow-md p-1 px-2">🐾</div>PawHome</h1>
         <ul class="flex items-center space-x-6 text-gray-900 ml-auto">
             <li><a href="homeped.php" class="hover:text-green-700">HOME</a></li>
             <li><a href="form.php" class="hover:text-green-700">FORM</a></li>
@@ -56,9 +56,9 @@ if (isset($_SESSION['user_id'])) {
 
                     <hr class="my-3">
 
-                    <a href="#" class="block py-1 font-medium hover:text-red-600 transition">⚙️ ตั้งค่า</a>
+                    <a href="setting.php" class="block py-1 font-medium hover:text-red-600 transition">⚙️ ตั้งค่า</a>
                     <a href="profile.php" class="block py-1 font-medium hover:text-red-600 transition">👤 โปรไฟล์</a>
-                    <a href="#" class="block py-1 font-medium hover:text-red-600 transition">ℹ️ About Us</a>
+                    <a href="about_us.php" class="block py-1 font-medium hover:text-red-600 transition">ℹ️ About Us</a>
                     
                     <hr class="my-3">
                     <a href="index.php" class="text-red-600 font-bold">ออกจากระบบ</a>
@@ -76,8 +76,8 @@ if (isset($_SESSION['user_id'])) {
     <section class="bg-white rounded-3xl shadow-2xl p-8 mb-8">
         <div class="md:flex gap-8 items-center">
             <div class="md:flex-1">
-                <h2 class="text-4xl font-extrabold text-[#2f5d31] mb-3">เกี่ยวกับ PetHome</h2>
-                <p class="text-gray-700 leading-relaxed">PetHome ตั้งขึ้นเพื่อเชื่อมโยงบ้านที่รักสัตว์กับสุนัขที่ต้องการบ้านใหม่ เราช่วยให้การรับเลี้ยงเป็นเรื่องง่าย ปลอดภัย  — โดยให้ข้อมูลสุนัข โปรไฟล์ผู้ขอ และระบบติดตามสถานะคำขอ</p>
+                <h2 class="text-4xl font-extrabold text-[#2f5d31] mb-3">เกี่ยวกับ PawHome</h2>
+                <p class="text-gray-700 leading-relaxed">PawHome ตั้งขึ้นเพื่อเชื่อมโยงบ้านที่รักสัตว์กับสุนัขที่ต้องการบ้านใหม่ เราช่วยให้การรับเลี้ยงเป็นเรื่องง่าย ปลอดภัย  — โดยให้ข้อมูลสุนัข โปรไฟล์ผู้ขอ และระบบติดตามสถานะคำขอ</p>
 
                 <div class="mt-6 flex gap-4">
                     <a href="homeped.php" class="px-6 py-3 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-700">ค้นหาสุนัข</a>

@@ -75,7 +75,7 @@ if (isset($_SESSION['user_id'])) {
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<title>Donate Bank - PetHome</title>
+<title>Donate Bank - PawHome</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
     body { font-family: 'Prompt', sans-serif; }
@@ -90,7 +90,7 @@ if (isset($_SESSION['user_id'])) {
 
         <h1 class="flex items-center gap-3 text-2xl font-extrabold text-[#2f5d31]">
             <div class="bg-white rounded-full shadow-md p-1 px-2">🐾</div>
-            PetHome
+            PawHome
         </h1>
 
         <ul class="flex items-center space-x-6 text-gray-900 ml-auto font-medium">
@@ -169,7 +169,7 @@ if (isset($_SESSION['user_id'])) {
         <img src="bank.png" class="w-16 h-16 rounded-xl shadow">
         <div>
             <p class="text-lg font-bold text-gray-800">ธนาคารไทยพาณิชย์</p>
-            <p class="text-gray-700">ชื่อบัญชี: มูลนิธิช่วยเหลือสัตว์ PetHome</p>
+            <p class="text-gray-700">ชื่อบัญชี: มูลนิธิช่วยเหลือสัตว์ PawHome</p>
             <p class="text-xl font-bold text-green-700" id="bankNumber">0-538-12387-0</p>
         </div>
     </div>

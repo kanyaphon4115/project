@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>PetHome</title>
+<title>PawHome</title>
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
@@ -30,7 +30,7 @@
             <div class="bg-white rounded-full shadow-md p-1 px-2">
                 🐾
             </div>
-            PetHome
+            PawHome
         </h1>
 
         <!-- MENU (ขยับไปขวา) -->

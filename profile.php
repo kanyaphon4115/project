@@ -127,7 +127,7 @@ if (isset($_SESSION['profile_message'])) {
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<title>โปรไฟล์ - PetHome</title>
+<title>โปรไฟล์ - PawHome</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
     body { font-family: 'Prompt', sans-serif; }
@@ -141,9 +141,8 @@ if (isset($_SESSION['profile_message'])) {
     <div class="flex items-center px-6">
 
         <!-- LOGO -->
-        <h1 class="flex items-center gap-3 text-2xl font-extrabold text-gray-800">
-            <div class="bg-white rounded-full shadow-md p-1 px-2">🐾</div>
-            PetHome
+        <h1 class="text-2xl font-extrabold text-[#2f5d31] flex items-center gap-2">
+            <span class="bg-white rounded-full shadow px-2">🐾</span> PawHome
         </h1>
 
         <!-- MENU -->
