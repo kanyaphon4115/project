@@ -215,6 +215,38 @@ if (isset($_SESSION['user_id'])) {
         </button>
     </div>
 </div>
+<!-- COPY SUCCESS POPUP -->
+<div id="copyPopup" 
+     class="fixed inset-0 hidden bg-black/40 flex items-center justify-center z-50">
+
+    <div class="bg-white w-96 p-6 rounded-2xl shadow-xl flex items-center gap-5 animate-pop">
+        
+        <!-- ICON LEFT -->
+        <div class="text-3xl text-green-500">
+            ✅
+        </div>
+
+        <!-- TEXT RIGHT -->
+        <div>
+            <h3 class="text-xl font-bold text-gray-800">คัดลอกสำเร็จ!</h3>
+            <p class="text-gray-600 mt-1">เลขบัญชีถูกคัดลอกแล้ว ✔️</p>
+
+            <button onclick="closeCopyPopup()"
+                class="mt-4 bg-green-600 text-white px-5 py-2 rounded-xl hover:bg-green-700 transition">
+                ปิด
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<style>
+@keyframes pop {
+    from { transform: scale(0.8); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+}
+.animate-pop { animation: pop .25s ease-out; }
+</style>
 
 
 
@@ -222,9 +254,15 @@ if (isset($_SESSION['user_id'])) {
 function copyBank() {
     const text = document.getElementById("bankNumber").innerText;
     navigator.clipboard.writeText(text);
-    alert("คัดลอกเลขบัญชีแล้ว!");
+
+    // แสดง Popup
+    document.getElementById("copyPopup").classList.remove("hidden");
+}
+function closeCopyPopup() {
+    document.getElementById("copyPopup").classList.add("hidden");
 }
 </script>
+
 
 <script>
 // Click to open, hold to close for profile dropdown

@@ -298,11 +298,12 @@ $status_file = "admin/status.json";
                 ➜ ดูรายละเอียดสุนัข
             </a>
 
-            <a href="?delete_id=<?= $f['id'] ?>"
-               onclick="return confirm('ลบรายการนี้หรือไม่?')"
-               class="text-red-600 font-semibold hover:text-red-800 transition">
-                🗑️ ลบ
-            </a>
+           <a href="#" 
+   onclick="openDeletePopup(<?= $f['id'] ?>)"
+   class="text-red-600 font-semibold hover:text-red-800 transition">
+    🗑️ ลบ
+</a>
+
 
         </div>
     </div>
@@ -354,6 +355,44 @@ $status_file = "admin/status.json";
 
 </div>
 
+<!-- DELETE CONFIRM POPUP -->
+<div id="deletePopup" 
+     class="fixed inset-0 hidden bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
+
+    <div class="bg-white w-[380px] p-6 rounded-2xl shadow-xl flex items-center gap-4 animate-pop">
+
+        <!-- ICON LEFT -->
+        <div class="text-5xl text-red-500">
+            🗑️
+        </div>
+
+        <!-- TEXT -->
+        <div class="flex-1">
+            <h3 class="text-xl font-bold text-gray-800">ยืนยันการลบ?</h3>
+            <p class="text-gray-600 text-sm mt-1">คุณต้องการลบรายการรับเลี้ยงนี้หรือไม่?</p>
+
+            <div class="flex justify-end gap-3 mt-4">
+                <button onclick="closeDeletePopup()"
+                        class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition">
+                    ยกเลิก
+                </button>
+
+                <a id="confirmDeleteBtn"
+                   class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
+                    ลบ
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+@keyframes pop {
+    from { transform: scale(0.9); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+}
+.animate-pop { animation: pop .25s ease-out; }
+</style>
 
 <script>
 // Click to open, hold to close
@@ -419,5 +458,16 @@ document.addEventListener('DOMContentLoaded', function(){
     });
 });
 </script>
+<script>
+function openDeletePopup(id) {
+    document.getElementById("confirmDeleteBtn").href = "?delete_id=" + id;
+    document.getElementById("deletePopup").classList.remove("hidden");
+}
+
+function closeDeletePopup() {
+    document.getElementById("deletePopup").classList.add("hidden");
+}
+</script>
+
 </body>
 </html>

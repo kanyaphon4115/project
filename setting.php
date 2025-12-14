@@ -2,93 +2,79 @@
 session_start();
 include("database/db.php");
 
-// Redirect if not logged in
+// ถ้าไม่ล็อกอิน → เด้งออก
 if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
+    header("Location: login.php");
     exit;
 }
 
-$user_email = $_SESSION['email'] ?? "guest@example.com";
-$user_name = explode("@", $user_email)[0];
+$user_id = $_SESSION['user_id'];
+$user_email = $_SESSION['email'];
+$user_name = explode("@", $user_email)[0]; 
+
+// ====================================================================
+// ลบบัญชีเมื่อกด "delete_account"
+// ====================================================================
+if (isset($_POST['delete_account'])) {
+
+    // 1) ลบ adopt_forms
+    $adopt = new mysqli("localhost", "root", "", "adopt_forms");
+    $adopt->query("DELETE FROM adopt_forms WHERE user_id = $user_id");
+    $adopt->close();
+
+    // 2) ลบข้อความแชท
+    $chat = new mysqli("localhost", "root", "", "chat");
+    $chat->query("DELETE FROM chat_messages 
+                  WHERE sender_id = $user_id OR receiver_id = $user_id");
+    $chat->close();
+
+    // 3) ลบการบริจาค
+    $donate = new mysqli("localhost", "root", "", "pethome_donate");
+    $donate->query("DELETE FROM donate_bank WHERE donor_name = '$user_name'");
+    $donate->close();
+
+    // 4) ลบ Avatar
+    foreach (glob("uploads/avatar_user_$user_id.*") as $file) {
+        unlink($file);
+    }
+
+    // 5) ลบข้อมูลบัญชี (register.form)
+$reg = new mysqli("localhost", "root", "", "register");
+$reg->query("SET FOREIGN_KEY_CHECKS = 0");
+$reg->query("DELETE FROM form WHERE id = $user_id");
+$reg->query("SET FOREIGN_KEY_CHECKS = 1");
+$reg->close();
+
+    // ออกจากระบบ
+    session_destroy();
+    header("Location: index.php?delete_success=1");
+    exit;
+}
+
+// ====================================================================
+// ส่วนแก้ไขบัญชี
+// ====================================================================
+
 $account_message = '';
 $password_message = '';
 
-// Load saved username from DB
+// โหลด username จาก DB
 $con_reg = new mysqli("localhost", "root", "", "register");
-if (!$con_reg->connect_errno) {
-    $stmt = $con_reg->prepare("SELECT username FROM form WHERE id = ? LIMIT 1");
-    $stmt->bind_param('i', $_SESSION['user_id']);
-    $stmt->execute();
-    $res = $stmt->get_result();
-    $row = $res->fetch_assoc();
-    if ($row && $row['username']) {
+$stmt = $con_reg->prepare("SELECT username FROM form WHERE id = ? LIMIT 1");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$res = $stmt->get_result();
+
+if ($row = $res->fetch_assoc()) {
+    if (!empty($row['username'])) {
         $user_name = $row['username'];
     }
-    $stmt->close();
-    $con_reg->close();
 }
 
-// Handle username save
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_account'])) {
-    $new_username = trim($_POST['username'] ?? '');
-    
-    if (!empty($new_username)) {
-        $con_reg = new mysqli("localhost", "root", "", "register");
-        if (!$con_reg->connect_errno) {
-            // Ensure username column exists
-            $check = $con_reg->query("SHOW COLUMNS FROM form LIKE 'username'");
-            if ($check->num_rows === 0) {
-                $con_reg->query("ALTER TABLE form ADD COLUMN username VARCHAR(120) NULL");
-            }
-            
-            $upd = $con_reg->prepare("UPDATE form SET username = ? WHERE id = ?");
-            $upd->bind_param('si', $new_username, $_SESSION['user_id']);
-            if ($upd->execute()) {
-                $account_message = '✅ บันทึกชื่อผู้ใช้เรียบร้อยแล้ว';
-                $user_name = $new_username;
-            } else {
-                $account_message = '❌ เกิดข้อผิดพลาด: ' . $con_reg->error;
-            }
-            $upd->close();
-            $con_reg->close();
-        }
-    } else {
-        $account_message = '❌ กรุณากรอกชื่อผู้ใช้';
-    }
-}
-
-// Handle password change
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
-    $old_pass = $_POST['old_password'] ?? '';
-    $new_pass = $_POST['new_password'] ?? '';
-    $confirm_pass = $_POST['confirm_password'] ?? '';
-
-    $con_reg = new mysqli("localhost", "root", "", "register");
-    if (!$con_reg->connect_errno) {
-        // Validate current password
-        $check_pass = $con_reg->query("SELECT pass FROM form WHERE id = " . $_SESSION['user_id'] . " LIMIT 1");
-        $pass_row = $check_pass->fetch_assoc();
-
-        if ($pass_row && $pass_row['pass'] === $old_pass) {
-            if ($new_pass === $confirm_pass && !empty($new_pass)) {
-                $pwd_upd = $con_reg->prepare("UPDATE form SET pass=? WHERE id=?");
-                $pwd_upd->bind_param('si', $new_pass, $_SESSION['user_id']);
-                if ($pwd_upd->execute()) {
-                    $password_message = '✅ เปลี่ยนรหัสผ่านเรียบร้อยแล้ว';
-                } else {
-                    $password_message = '❌ เกิดข้อผิดพลาด: ' . $con_reg->error;
-                }
-                $pwd_upd->close();
-            } else {
-                $password_message = '❌ รหัสผ่านใหม่ไม่ตรงกัน หรือไม่ได้กรอก';
-            }
-        } else {
-            $password_message = '❌ รหัสผ่านปัจจุบันไม่ถูกต้อง';
-        }
-        $con_reg->close();
-    }
-}
+$stmt->close();
+$con_reg->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -182,13 +168,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
     <div class="bg-red-50 border border-red-300 shadow-xl rounded-3xl p-8 mb-10">
         <h3 class="text-2xl font-bold text-red-700 mb-3">Danger Zone</h3>
         <p class="text-gray-700 mb-4">การลบบัญชีเป็นการดำเนินการถาวรและไม่สามารถกู้คืนได้</p>
+<button onclick="openDeleteAccountPopup()" 
+        class="px-6 py-3 bg-red-600 text-white rounded-xl font-semibold hover:bg-red-700">
+    ลบบัญชีผู้ใช้
+</button>
 
-        <button class="px-6 py-3 bg-red-600 text-white rounded-xl font-semibold hover:bg-red-700">
-            ลบบัญชีผู้ใช้
-        </button>
     </div>
 
 </div>
+<!-- DELETE ACCOUNT POPUP -->
+<div id="deleteAccountPopup"
+     class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden z-50 flex justify-center items-center">
+
+    <div class="bg-white w-[380px] rounded-2xl p-6 shadow-xl animate-pop">
+
+        <div class="text-5xl text-red-500 mb-3 text-center">⚠️</div>
+
+        <h3 class="text-xl font-bold text-center text-gray-800">ต้องการลบบัญชีจริงหรือไม่?</h3>
+        <p class="text-center text-gray-600 mt-1">การลบนี้ไม่สามารถกู้คืนได้</p>
+
+        <div class="flex justify-center gap-3 mt-5">
+            <button onclick="closeDeleteAccountPopup()"
+                    class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">
+                ยกเลิก
+            </button>
+
+            <form method="POST">
+                <button name="delete_account"
+                        class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                    ลบเลย
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+@keyframes pop {
+    from { transform: scale(0.9); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+}
+.animate-pop { animation: pop .25s ease-out; }
+</style>
+<script>
+function openDeleteAccountPopup() {
+    document.getElementById("deleteAccountPopup").classList.remove("hidden");
+}
+function closeDeleteAccountPopup() {
+    document.getElementById("deleteAccountPopup").classList.add("hidden");
+}
+</script>
 
 </body>
 </html>
