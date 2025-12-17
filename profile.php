@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['avatar']) && isset($
         }
 
     } else {
-        $upload_error = "ไฟล์ต้องเป็นภาพ (jpg, png, gif)";
+        $upload_error = "ไฟล์ต้องเป็นภาพ (jpg, jpeg, png, gif)";
     }
 }
 
@@ -178,7 +178,6 @@ if (isset($_SESSION['profile_message'])) {
                     <hr class="my-3">
                     <a href="index.php" class="text-red-600 font-bold">ออกจากระบบ</a>
                 </div>
-
             </li>
         </ul>
     </div>
