@@ -1,0 +1,22 @@
+
+CREATE DATABASE IF NOT EXISTS pethome_donate
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_general_ci;
+
+USE pethome_donate;
+
+CREATE TABLE donate_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    fullname VARCHAR(255) NOT NULL,
+    contact VARCHAR(50) NOT NULL,
+    items TEXT NOT NULL,
+    send_type VARCHAR(100) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+CREATE TABLE donate_bank (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    donor_name VARCHAR(255) NOT NULL,
+    slip_path VARCHAR(255) DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
