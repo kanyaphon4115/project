@@ -98,9 +98,9 @@ $result = $con->query($sql);
            💬 แชท
         </a>
 
-        <a href="donations.php"
+        <a href="admin_donations.php"
            class="block p-3 rounded-xl font-semibold
-           <?= $currentPage == 'donations.php'
+           <?= $currentPage == 'admin_donations.php'
               ? 'bg-orange-100 text-orange-600'
               : 'hover:bg-orange-50 text-gray-700' ?>">
            💰 การบริจาค

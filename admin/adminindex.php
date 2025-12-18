@@ -77,7 +77,7 @@ $latest_result = mysqli_query($con_form, $latest_sql);
         <a href="admin_requests.php" class="block p-3 rounded-xl hover:bg-orange-50">📄 คำขอรับเลี้ยง</a>
         <a href="admin_user.php" class="block p-3 rounded-xl hover:bg-orange-50">👤 ผู้ใช้งาน</a>
         <a href="admin_chat.php" class="block p-3 rounded-xl hover:bg-orange-50">💬 แชท</a>
-        <a href="donations.php" class="block p-3 rounded-xl hover:bg-orange-50">💰 การบริจาค</a>
+        <a href="admin_donations.php" class="block p-3 rounded-xl hover:bg-orange-50">💰 การบริจาค</a>
     </nav>
 </aside>
 

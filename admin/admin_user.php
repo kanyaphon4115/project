@@ -51,7 +51,7 @@ $result = $con->query($sql);
         menu('admin_requests.php','📄','คำขอรับเลี้ยง',$currentPage);
         menu('admin_user.php','👤','ผู้ใช้งาน',$currentPage);
         menu('admin_chat.php','💬','แชท',$currentPage);
-        menu('donations.php','💰','การบริจาค',$currentPage);
+        menu('admin_donations.php','💰','การบริจาค',$currentPage);
         ?>
     </nav>
 </aside>
