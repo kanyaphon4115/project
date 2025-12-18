@@ -113,17 +113,17 @@ $dog_result = mysqli_query($con, $dog_sql);
            📄 คำขอรับเลี้ยง
         </a>
 
-        <a href="users.php"
+        <a href="admin_user.php"
            class="block p-3 rounded-xl font-semibold
-           <?= $currentPage == 'users.php'
+           <?= $currentPage == 'admin_user.php'
               ? 'bg-orange-100 text-orange-600'
               : 'hover:bg-orange-50 text-gray-700' ?>">
            👤 ผู้ใช้งาน
         </a>
 
-        <a href="chat.php"
+        <a href="admin_chat.php"
            class="block p-3 rounded-xl font-semibold
-           <?= $currentPage == 'chat.php'
+           <?= $currentPage == 'admin_chat.php'
               ? 'bg-orange-100 text-orange-600'
               : 'hover:bg-orange-50 text-gray-700' ?>">
            💬 แชท

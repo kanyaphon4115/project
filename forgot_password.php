@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("backend/db.php");
+include("database/db.php");
 require_once __DIR__ . "/components/mailer.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {

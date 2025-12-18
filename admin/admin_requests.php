@@ -82,17 +82,17 @@ $result = $con->query($sql);
 </a>
 
 
-        <a href="users.php"
+        <a href="admin_user.php"
            class="block p-3 rounded-xl font-semibold
-           <?= $currentPage == 'users.php'
+           <?= $currentPage == 'admin_user.php'
               ? 'bg-orange-100 text-orange-600'
               : 'hover:bg-orange-50 text-gray-700' ?>">
            👤 ผู้ใช้งาน
         </a>
 
-        <a href="chat.php"
+        <a href="admin_chat.php"
            class="block p-3 rounded-xl font-semibold
-           <?= $currentPage == 'chat.php'
+           <?= $currentPage == 'admin_chat.php'
               ? 'bg-orange-100 text-orange-600'
               : 'hover:bg-orange-50 text-gray-700' ?>">
            💬 แชท
@@ -108,14 +108,14 @@ $result = $con->query($sql);
 
     </nav>
 </aside>
-</aside>
 
-<main class="ml-64 flex flex-col min-h-screen p-10">
+
+<main class="ml-64 flex flex-col min-h-screen p-10 w-[calc(100vw-16rem)]">
 
 <h1 class="text-3xl font-black mb-6">📄 คำขอรับเลี้ยงสุนัข</h1>
 
-<div class="bg-white rounded-2xl shadow overflow-hidden">
-<table class="w-full text-left text-sm">
+<div class="bg-white rounded-2xl shadow overflow-x-auto">
+<table class="w-full min-w-[1400px] text-left text-sm">
 <thead class="bg-orange-100">
 <tr>
   <th class="p-4">ผู้ขอ</th>
@@ -150,7 +150,9 @@ $result = $con->query($sql);
 
 <td><?= htmlspecialchars($row['time_home']) ?> ชม.</td>
 
-<td class="max-w-xs truncate"><?= htmlspecialchars($row['reason']) ?></td>
+<td class="max-w-md whitespace-normal break-words">
+    <?= htmlspecialchars($row['reason']) ?>
+</td>
 
 <td>
 <span class="px-3 py-1 rounded text-xs

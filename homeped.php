@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("backend/db_ped.php"); // DB Connection
+include("database/db_ped.php"); // DB Connection
 
 // โหลดรูปโปรไฟล์
 $avatar_src = null;

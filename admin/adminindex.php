@@ -75,8 +75,8 @@ $latest_result = mysqli_query($con_form, $latest_sql);
         <a href="adminindex.php" class="block p-3 rounded-xl bg-orange-100 font-semibold">🏠 Dashboard</a>
         <a href="admin_dogs.php" class="block p-3 rounded-xl hover:bg-orange-50">🐕 จัดการสุนัข</a>
         <a href="admin_requests.php" class="block p-3 rounded-xl hover:bg-orange-50">📄 คำขอรับเลี้ยง</a>
-        <a href="users.php" class="block p-3 rounded-xl hover:bg-orange-50">👤 ผู้ใช้งาน</a>
-        <a href="chat.php" class="block p-3 rounded-xl hover:bg-orange-50">💬 แชท</a>
+        <a href="admin_user.php" class="block p-3 rounded-xl hover:bg-orange-50">👤 ผู้ใช้งาน</a>
+        <a href="admin_chat.php" class="block p-3 rounded-xl hover:bg-orange-50">💬 แชท</a>
         <a href="donations.php" class="block p-3 rounded-xl hover:bg-orange-50">💰 การบริจาค</a>
     </nav>
 </aside>

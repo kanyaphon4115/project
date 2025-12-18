@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("backend/db.php");
+include("database/db.php");
 
 // ต้องผ่าน OTP มาก่อน
 $user_id = $_SESSION['otp_verified_user_id'] ?? null;
