@@ -70,7 +70,7 @@ if (isset($_SESSION['user_id'])) {
                     <a href="about_us.php" class="block py-1 font-medium hover:text-red-600 transition">ℹ️ About Us</a>
 
                     <hr class="my-3">
-                    <a href="index.php" class="text-red-600 font-bold">ออกจากระบบ</a>
+                    <a href="logout.php" class="text-red-600 font-bold">ออกจากระบบ</a>
                 </div>
 
             </li>

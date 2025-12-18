@@ -1,5 +1,5 @@
 <?php
-include("database/db_ped.php");
+include("backend/db_ped.php");
 
 // สร้าง Query เริ่มต้น
 $sql = "SELECT * FROM dogs WHERE 1 ";
