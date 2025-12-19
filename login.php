@@ -156,7 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         class="absolute right-4 top-3.5 z-20 pointer-events-auto text-black">
 
                         <!-- ตาเปิด -->
-                        <svg id="eyeOpen" xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                       <!-- <svg id="eyeOpen" xmlns="http://www.w3.org/2000/svg" width="22" height="22"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round">
                             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z" />
@@ -164,7 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </svg>
 
                         <!-- ตาปิด (มีรูปตา + เส้นทับ) -->
-                        <svg id="eyeClosed" xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                       <!-- <svg id="eyeClosed" xmlns="http://www.w3.org/2000/svg" width="22" height="22"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round" class="hidden">
                             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z" />
@@ -173,7 +173,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </svg>
                     </button>
 
-                </div>
+                </div> -->
 
 
 
