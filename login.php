@@ -142,29 +142,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <!-- PASSWORD -->
-    <div class="relative">
-        <input
-            type="password"
-            name="password"
-            id="password"
-            class="w-full py-3 pl-12 pr-12 rounded-full bg-white shadow"
-            placeholder="Password"
-            required>
+    <div class="relative mb-12">
+    <input
+        type="password"
+        name="password"
+        class="w-full py-3 pl-12 pr-12 rounded-full bg-white shadow"
+        placeholder="Password"
+        required>
 
-        <span class="absolute left-4 top-2.5 text-gray-500 text-xl">🔒</span>
+    <span class="absolute left-4 top-2.5 text-gray-500 text-xl">🔒</span>
 
-        <!-- ลืมรหัสผ่าน (ขวาล่างของช่องรหัส) -->
-        <a href="forgot_password.php"
-           class="absolute right-4 -bottom-6 text-green-700 text-sm font-semibold hover:underline">
-            ลืมรหัสผ่าน?
-        </a>
-    </div>
+    <a href="forgot_password.php"
+       class="absolute right-4 -bottom-6 text-green-700 text-sm font-semibold hover:underline">
+        ลืมรหัสผ่าน?
+    </a>
+</div>
 
-    <!-- SUBMIT -->
-    <button type="submit"
-        class="w-full bg-green-600 text-white py-3 rounded-full text-lg font-semibold shadow-lg hover:bg-green-700 transition">
-        เข้าสู่ระบบ
-    </button>
+<button type="submit"
+    class="w-[70%] mx-auto mt-8 block bg-green-600 text-white py-3 rounded-full text-lg font-semibold shadow-lg hover:bg-green-700 transition">
+    เข้าสู่ระบบ
+</button>
 
 </form>
 
