@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    $stmt = $con->prepare("SELECT id, pass FROM form WHERE email=? LIMIT 1");
+    $stmt = $con->prepare("SELECT id, pass, role FROM form WHERE email=? LIMIT 1");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -52,11 +52,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($ok) {
-        $_SESSION['user_id'] = $row['id'];
-        $_SESSION['email'] = $email;
+        $_SESSION['user_id'] = (int)$row['id'];
+        $_SESSION['email']   = $email;
+        $_SESSION['role']    = $row['role'] ?? 'user';
         header("Location: index.php");
         exit;
     }
+
 
     echo "<script>alert('รหัสผ่านไม่ถูกต้อง');history.back();</script>";
     exit;

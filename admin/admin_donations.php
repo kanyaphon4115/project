@@ -3,7 +3,7 @@ session_start();
 $currentPage = basename($_SERVER['PHP_SELF']);
 
 /* ===== CONNECT DB ===== */
-$con = new mysqli("localhost", "root", "", "pethome_donate");
+$con = new mysqli("localhost", "root", "", "pet_home");
 if ($con->connect_error) {
     die("DB Error");
 }

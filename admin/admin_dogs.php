@@ -1,6 +1,6 @@
 <?php
 session_start();
-include(__DIR__ . "/../database/db_ped.php");
+include(__DIR__ . "/../backend/db_ped.php");
 $currentPage = basename($_SERVER['PHP_SELF']);
 // ===== PAGINATION =====
 $limit = 5; // จำนวนย่อยต่อหน้า
@@ -180,10 +180,19 @@ setTimeout(() => document.getElementById('toast').remove(), 3000);
 
 <?php while ($dog = mysqli_fetch_assoc($dog_result)): ?>
 <tr class="hover:bg-orange-50">
+<?php
+  $img = $dog['image'] ?? '';
+  $img = ltrim($img, '/');
+  $src = (str_starts_with($img, 'assets/')) ? $img : 'assets/' . $img;
+  $src_admin = '../' . $src;
+?>
+
 <td class="p-4">
-<img src="../<?= htmlspecialchars($dog['image']) ?>"
-     class="w-20 h-20 object-cover rounded-xl border">
+  <img src="<?= htmlspecialchars($src_admin) ?>"
+       class="w-20 h-20 object-cover rounded-xl border"
+       alt="<?= htmlspecialchars($dog['name'] ?? 'dog') ?>">
 </td>
+
 <td class="font-semibold"><?= htmlspecialchars($dog['name']) ?></td>
 <td><?= htmlspecialchars($dog['breed']) ?></td>
 <td><?= htmlspecialchars($dog['age']) ?></td>

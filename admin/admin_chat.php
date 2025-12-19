@@ -3,7 +3,7 @@ session_start();
 $currentPage = basename($_SERVER['PHP_SELF']);
 
 $admin_id = 1; // ID ของ Admin
-$con = new mysqli("localhost","root","","chat");
+$con = new mysqli("localhost","root","","pet_home");
 
 /* ===== GET USER LIST ===== */
 $users = $con->query("

@@ -2,18 +2,18 @@
 <nav class="w-full fixed top-0 left-0 bg-white/40 shadow-sm py-4 z-50">
   <div class="flex items-center px-4 sm:px-6 justify-between">
 
-  <!-- เฉพาะหน้า home_ped -->
-  <?php if (basename($_SERVER['PHP_SELF']) == 'homeped.php'): ?>
-    <button id="openFilter" class="text-2xl mr-4 hover:text-green-700">☰</button>
-<?php endif; ?>
+    <!-- เฉพาะหน้า home_ped -->
+    <?php if (basename($_SERVER['PHP_SELF']) == 'homeped.php'): ?>
+      <button id="openFilter" class="text-2xl mr-4 hover:text-green-700">☰</button>
+    <?php endif; ?>
 
     <!-- LOGO -->
     <h1>
-  <a href="index.php" class="flex items-center gap-3 text-xl sm:text-2xl font-extrabold text-[#2f5d31]">
-    <div class="bg-white rounded-full shadow-md p-1 px-2">🐾</div>
-    PawHome
-  </a>
-</h1>
+      <a href="index.php" class="flex items-center gap-3 text-xl sm:text-2xl font-extrabold text-[#2f5d31]">
+        <div class="bg-white rounded-full shadow-md p-1 px-2">🐾</div>
+        PawHome
+      </a>
+    </h1>
 
 
     <!-- ☰ MOBILE MENU BUTTON (แสดงเฉพาะจอเล็ก) -->
@@ -29,6 +29,10 @@
       <li><a href="form.php" class="hover:text-green-700">FORM</a></li>
       <li><a href="donate.php" class="hover:text-green-700">DONATE</a></li>
       <li><a href="request_status.php" class="hover:text-green-700">REQUEST STATUS</a></li>
+      <?php if (($_SESSION['role'] ?? 'user') === 'admin'): ?>
+        <li><a href="admin/adminindex.php" class="hover:text-green-700">ADMIN</a></li>
+      <?php endif; ?>
+
 
       <?php if (isset($_SESSION['user_id'])): ?>
         <!-- DESKTOP PROFILE -->
@@ -43,7 +47,7 @@
           </button>
 
           <div id="profileDropdown"
-     class="hidden absolute right-0 mt-3 w-60 bg-white shadow-2xl rounded-xl p-4 text-gray-700 z-60 border border-gray-200">
+            class="hidden absolute right-0 mt-3 w-60 bg-white shadow-2xl rounded-xl p-4 text-gray-700 z-60 border border-gray-200">
 
             <p class="text-sm text-gray-500">เข้าสู่ระบบเป็น</p>
             <p class="font-bold"><?= explode("@", $_SESSION['email'])[0]; ?></p>
@@ -115,6 +119,12 @@
         <a href="form.php" class="px-3 py-2 rounded-lg hover:bg-green-50 hover:text-green-700">FORM</a>
         <a href="donate.php" class="px-3 py-2 rounded-lg hover:bg-green-50 hover:text-green-700">DONATE</a>
         <a href="request_status.php" class="px-3 py-2 rounded-lg hover:bg-green-50 hover:text-green-700">REQUEST STATUS</a>
+        <?php if (($_SESSION['role'] ?? 'user') === 'admin'): ?>
+          <a href="admin/adminindex.php" class="px-3 py-2 rounded-lg hover:bg-green-50 hover:text-green-700">
+            ADMIN
+          </a>
+        <?php endif; ?>
+
       </div>
 
       <?php if (isset($_SESSION['user_id'])): ?>
@@ -133,52 +143,55 @@
 </nav>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  // DESKTOP PROFILE DROPDOWN
-  const profileBtn = document.getElementById('profileBtn');
-  const profileDropdown = document.getElementById('profileDropdown');
-  const profileMenu = document.getElementById('profileMenu');
+  document.addEventListener('DOMContentLoaded', () => {
+    // DESKTOP PROFILE DROPDOWN
+    const profileBtn = document.getElementById('profileBtn');
+    const profileDropdown = document.getElementById('profileDropdown');
+    const profileMenu = document.getElementById('profileMenu');
 
-  if (profileBtn && profileDropdown && profileMenu) {
-    profileBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      profileDropdown.classList.toggle('hidden');
-    });
+    if (profileBtn && profileDropdown && profileMenu) {
+      profileBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        profileDropdown.classList.toggle('hidden');
+      });
 
-    document.addEventListener('click', (e) => {
-      if (!profileMenu.contains(e.target)) profileDropdown.classList.add('hidden');
-    });
-  }
+      document.addEventListener('click', (e) => {
+        if (!profileMenu.contains(e.target)) profileDropdown.classList.add('hidden');
+      });
+    }
 
-  // MOBILE MENU
-  const openBtn = document.getElementById('mobileMenuBtn');
-  const overlay = document.getElementById('mobileMenuOverlay');
-  const closeBtn = document.getElementById('mobileMenuClose');
-  const panel = document.getElementById('mobileMenuPanel');
+    // MOBILE MENU
+    const openBtn = document.getElementById('mobileMenuBtn');
+    const overlay = document.getElementById('mobileMenuOverlay');
+    const closeBtn = document.getElementById('mobileMenuClose');
+    const panel = document.getElementById('mobileMenuPanel');
 
-  function openMenu() {
-    overlay.classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-  }
+    function openMenu() {
+      overlay.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
 
-  function closeMenu() {
-    overlay.classList.add('hidden');
-    document.body.style.overflow = '';
-  }
+    function closeMenu() {
+      overlay.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
 
-  if (openBtn && overlay && closeBtn && panel) {
-    openBtn.addEventListener('click', (e) => { e.stopPropagation(); openMenu(); });
-    closeBtn.addEventListener('click', closeMenu);
+    if (openBtn && overlay && closeBtn && panel) {
+      openBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openMenu();
+      });
+      closeBtn.addEventListener('click', closeMenu);
 
-    // click outside panel closes
-    overlay.addEventListener('click', (e) => {
-      if (!panel.contains(e.target)) closeMenu();
-    });
+      // click outside panel closes
+      overlay.addEventListener('click', (e) => {
+        if (!panel.contains(e.target)) closeMenu();
+      });
 
-    // ESC closes
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !overlay.classList.contains('hidden')) closeMenu();
-    });
-  }
-});
+      // ESC closes
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !overlay.classList.contains('hidden')) closeMenu();
+      });
+    }
+  });
 </script>

@@ -4,7 +4,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
 
 /* ===== CONNECT DB ===== */
-$con = new mysqli("localhost", "root", "", "adopt_forms");
+$con = new mysqli("localhost", "root", "", "pet_home");
 
 /* ===== LOAD STATUS JSON ===== */
 $status_file = __DIR__ . "/status.json";

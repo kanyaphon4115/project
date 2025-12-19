@@ -1,24 +1,19 @@
 <?php
 session_start();
 
-// ===== INCLUDE DB ทีละตัว แล้วเก็บ connection =====
+if (!isset($_SESSION['user_id']) || ($_SESSION['role'] ?? 'user') !== 'admin') {
+  header("Location: ../index.php");
+  exit;
+}
+require_once __DIR__ . "/../backend/db.php"; // ไฟล์นี้ต้องสร้าง $con
 
-// register (form)
-include(__DIR__ . "/../database/db.php");
+// ใช้ connection เดียวกันทั้งหมด
 $con_register = $con;
-
-// ped_home (dogs)
-include(__DIR__ . "/../database/db_ped.php");
-$con_ped = $con;
-
-// pethome_donations (donate)
-include(__DIR__ . "/../database/db_donate.php");
-$con_donate = $con;
-
-// adopt_forms (ยังไม่ใช้ตอนนี้ แต่เตรียมไว้)
-include(__DIR__ . "/../database/db_form.php");
-$con_form = $con;
+$con_ped      = $con;
+$con_donate   = $con;
+$con_form     = $con;
 ?>
+
 <?php
 // ---------- USERS (register.form) ----------
 $user_sql = "SELECT COUNT(*) AS total FROM form";
@@ -163,7 +158,8 @@ $latest_result = mysqli_query($con_form, $latest_sql);
             <td><?= htmlspecialchars($dog_name) ?></td>
             <td class="text-orange-600 font-semibold">รอดำเนินการ</td>
             <td>
-                <a href="/project/dog_details.php?id=<?= $row['dog_id'] ?>"
+                <!-- ในเครื่องurlไม่เหมือนกัน -->
+                <a href="/project/project/dog_details.php?id=<?= $row['dog_id'] ?>" 
    class="text-blue-600 hover:underline">
    ดูรายละเอียด
 </a>
