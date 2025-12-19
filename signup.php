@@ -101,69 +101,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <!-- FORM -->
-            <form action="" method="POST" class="mt-10 space-y-5">
+            <form method="POST" class="mt-8 sm:mt-10 space-y-6">
 
-                <div class="relative">
-                    <input type="email" name="email"
-                        class="w-full py-3 pl-12 pr-4 rounded-full bg-white shadow"
-                        placeholder="E-mail" required>
-                    <span class="absolute left-4 top-2.5 text-gray-500 text-xl">📧</span>
-                </div>
+    <!-- EMAIL -->
+    <div class="relative">
+        <input type="email" name="email"
+            class="w-full py-3 pl-12 pr-4 rounded-full bg-white shadow"
+            placeholder="E-mail" required>
+        <span class="absolute left-4 top-2.5 text-gray-500 text-xl">📧</span>
+    </div>
 
-                <div class="relative">
-                    <input type="password" name="password"
-                        class="password-input w-full py-3 pl-12 pr-12 rounded-full bg-white shadow"
-                        placeholder="Password" required>
+    <!-- PASSWORD -->
+    <div class="relative">
+        <input
+            type="password"
+            name="password"
+            id="password"
+            class="w-full py-3 pl-12 pr-12 rounded-full bg-white shadow"
+            placeholder="Password"
+            required>
 
-                    <span class="absolute left-4 top-2.5 text-gray-500 text-xl">🔒</span>
+        <span class="absolute left-4 top-2.5 text-gray-500 text-xl">🔒</span>
 
-                   <!--  <button type="button"
-                        class="toggle-password absolute right-4 top-3.5 z-30 pointer-events-auto text-black">
-
-                        <!-- eye open 
-                        <svg class="eye-open" xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z" />
-                            <circle cx="12" cy="12" r="3" />
-                        </svg>
-
-                        <!-- eye closed 
-                        <svg class="eye-closed hidden" xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z" />
-                            <circle cx="12" cy="12" r="3" />
-                            <path d="M1 1l22 22" />
-                        </svg>
-                    </button>
-                </div>-->
-
-
-                <div class="relative">
-                    <input type="password" name="confirm_password"
-                        class="password-input w-full py-3 pl-12 pr-12 rounded-full bg-white shadow"
-                        placeholder="Confirm password" required>
-
-                    <span class="absolute left-4 top-2.5 text-gray-500 text-xl">🔒</span>
-
-                  <!--  <button type="button"
-                        class="toggle-password absolute right-4 top-3.5 z-30 pointer-events-auto text-black">
-
-                        <!-- eye open 
-                        <svg class="eye-open" xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z" />
-                            <circle cx="12" cy="12" r="3" />
-                        </svg>
-
-                        <!-- eye closed 
-                        <svg class="eye-closed hidden" xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z" />
-                            <circle cx="12" cy="12" r="3" />
-                            <path d="M1 1l22 22" />
-                        </svg>
-                    </button>
-                </div>-->
+        <!-- ลืมรหัสผ่าน (ขวาล่างของช่องรหัส) -->
+        <a href="forgot_password.php"
+           class="absolute right-4 -bottom-6 text-green-700 text-sm font-semibold hover:underline">
+            ลืมรหัสผ่าน?
+        </a>
+    </div>
 
 
                 <button type="submit"
