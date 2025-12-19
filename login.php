@@ -131,63 +131,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <!-- LOGIN FORM -->
-            <form method="POST" class="mt-8 sm:mt-10 space-y-4 sm:space-y-5">
+            <form method="POST" class="mt-8 sm:mt-10 space-y-6">
 
+    <!-- EMAIL -->
+    <div class="relative">
+        <input type="email" name="email"
+            class="w-full py-3 pl-12 pr-4 rounded-full bg-white shadow"
+            placeholder="E-mail" required>
+        <span class="absolute left-4 top-2.5 text-gray-500 text-xl">📧</span>
+    </div>
 
-                <div class="relative">
-                    <input type="email" name="email"
-                        class="w-full py-3 pl-12 pr-4 rounded-full bg-white shadow"
-                        placeholder="E-mail" required>
-                    <span class="absolute left-4 top-2.5 text-gray-500 text-xl">📧</span>
-                </div>
+    <!-- PASSWORD -->
+    <div class="relative">
+        <input
+            type="password"
+            name="password"
+            id="password"
+            class="w-full py-3 pl-12 pr-12 rounded-full bg-white shadow"
+            placeholder="Password"
+            required>
 
-                <div class="relative">
-                    <input
-                        type="password"
-                        name="password"
-                        id="password"
-                        class="w-full py-3 pl-12 pr-12 rounded-full bg-white shadow"
-                        placeholder="Password"
-                        required>
+        <span class="absolute left-4 top-2.5 text-gray-500 text-xl">🔒</span>
 
-                    <span class="absolute left-4 top-2.5 text-gray-500 text-xl">🔒</span>
+        <!-- ลืมรหัสผ่าน (ขวาล่างของช่องรหัส) -->
+        <a href="forgot_password.php"
+           class="absolute right-4 -bottom-6 text-green-700 text-sm font-semibold hover:underline">
+            ลืมรหัสผ่าน?
+        </a>
+    </div>
 
-                    <button type="button" id="togglePassword"
-                        class="absolute right-4 top-3.5 z-20 pointer-events-auto text-black">
+    <!-- SUBMIT -->
+    <button type="submit"
+        class="w-full bg-green-600 text-white py-3 rounded-full text-lg font-semibold shadow-lg hover:bg-green-700 transition">
+        เข้าสู่ระบบ
+    </button>
 
-                        <!-- ตาเปิด -->
-                       <!-- <svg id="eyeOpen" xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z" />
-                            <circle cx="12" cy="12" r="3" />
-                        </svg>
+</form>
 
-                        <!-- ตาปิด (มีรูปตา + เส้นทับ) -->
-                       <!-- <svg id="eyeClosed" xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round" class="hidden">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z" />
-                            <circle cx="12" cy="12" r="3" />
-                            <path d="M1 1l22 22" />
-                        </svg>
-                    </button>
-
-                </div> -->
-
-
-
-                <div class="flex justify-end -mt-3">
-                    <a href="forgot_password.php" class="text-green-700 text-sm font-semibold hover:underline">
-                        ลืมรหัสผ่าน?
-                    </a>
-                </div>
-
-                <button type="submit"
-                    class="w-full bg-green-600 text-white py-3 rounded-full text-lg font-semibold shadow-lg hover:bg-green-700 transition">
-                    เข้าสู่ระบบ
-                </button>
-            </form>
 
             <!-- UNDER FORM LINKS -->
             <div class="text-center mt-5">
