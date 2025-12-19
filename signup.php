@@ -117,17 +117,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     <span class="absolute left-4 top-2.5 text-gray-500 text-xl">🔒</span>
 
-                    <button type="button"
+                   <!--  <button type="button"
                         class="toggle-password absolute right-4 top-3.5 z-30 pointer-events-auto text-black">
 
-                        <!-- eye open -->
+                        <!-- eye open 
                         <svg class="eye-open" xmlns="http://www.w3.org/2000/svg" width="22" height="22"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z" />
                             <circle cx="12" cy="12" r="3" />
                         </svg>
 
-                        <!-- eye closed -->
+                        <!-- eye closed 
                         <svg class="eye-closed hidden" xmlns="http://www.w3.org/2000/svg" width="22" height="22"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z" />
@@ -135,7 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <path d="M1 1l22 22" />
                         </svg>
                     </button>
-                </div>
+                </div>-->
 
 
                 <div class="relative">
@@ -145,17 +145,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     <span class="absolute left-4 top-2.5 text-gray-500 text-xl">🔒</span>
 
-                    <button type="button"
+                  <!--  <button type="button"
                         class="toggle-password absolute right-4 top-3.5 z-30 pointer-events-auto text-black">
 
-                        <!-- eye open -->
+                        <!-- eye open 
                         <svg class="eye-open" xmlns="http://www.w3.org/2000/svg" width="22" height="22"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z" />
                             <circle cx="12" cy="12" r="3" />
                         </svg>
 
-                        <!-- eye closed -->
+                        <!-- eye closed 
                         <svg class="eye-closed hidden" xmlns="http://www.w3.org/2000/svg" width="22" height="22"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z" />
@@ -163,7 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <path d="M1 1l22 22" />
                         </svg>
                     </button>
-                </div>
+                </div>-->
 
 
                 <button type="submit"
