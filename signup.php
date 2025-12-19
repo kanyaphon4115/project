@@ -131,10 +131,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
 
-                <button type="submit"
-                    class="w-full bg-green-600 text-white py-3 rounded-full text-lg font-semibold shadow-lg hover:bg-green-700 transition">
-                    Sign Up
-                </button>
+                      <button type="submit"
+    class="w-[70%] mx-auto mt-8 block bg-green-600 text-white py-3 rounded-full text-lg font-semibold shadow-lg hover:bg-green-700 transition">
+    Sign Up
+</button>
+
 
             </form>
 
