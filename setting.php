@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("database/db.php");
+include("backend/db.php");
 
 // ถ้าไม่ล็อกอิน → เด้งออก
 if (!isset($_SESSION['user_id'])) {
@@ -16,18 +16,18 @@ $user_name = explode("@", $user_email)[0];
 if (isset($_POST['delete_account'])) {
 
     // 1) ลบ adopt_forms
-    $adopt = new mysqli("localhost", "root", "", "adopt_forms");
+    $adopt = new mysqli("localhost", "root", "", "pet_home");
     $adopt->query("DELETE FROM adopt_forms WHERE user_id = $user_id");
     $adopt->close();
 
     // 2) ลบข้อความแชท
-    $chat = new mysqli("localhost", "root", "", "chat");
+    $chat = new mysqli("localhost", "root", "", "pet_home");
     $chat->query("DELETE FROM chat_messages 
                   WHERE sender_id = $user_id OR receiver_id = $user_id");
     $chat->close();
 
     // 3) ลบการบริจาค
-    $donate = new mysqli("localhost", "root", "", "pethome_donate");
+    $donate = new mysqli("localhost", "root", "", "pet_home");
     $donate->query("DELETE FROM donate_bank WHERE donor_name = '$user_name'");
     $donate->close();
 
@@ -37,7 +37,7 @@ if (isset($_POST['delete_account'])) {
     }
 
     // 5) ลบข้อมูลบัญชี (register.form)
-$reg = new mysqli("localhost", "root", "", "register");
+$reg = new mysqli("localhost", "root", "", "pet_home");
 $reg->query("SET FOREIGN_KEY_CHECKS = 0");
 $reg->query("DELETE FROM form WHERE id = $user_id");
 $reg->query("SET FOREIGN_KEY_CHECKS = 1");
@@ -55,7 +55,7 @@ $account_message = '';
 $password_message = '';
 
 // โหลด username จาก DB
-$con_reg = new mysqli("localhost", "root", "", "register");
+$con_reg = new mysqli("localhost", "root", "", "pet_home");
 $stmt = $con_reg->prepare("SELECT username FROM form WHERE id = ? LIMIT 1");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
@@ -116,7 +116,7 @@ $con_reg->close();
         <form method="POST" class="space-y-4">
             <div>
                 <label class="text-gray-700 font-medium">ชื่อผู้ใช้</label>
-                <input type="text" name="username" value="<?= htmlspecialchars($user_name) ?>" 
+                <input type="text" name="username" value="<?= htmlspecialchars($username) ?>" 
                     class="w-full mt-1 p-3 rounded-xl shadow border border-gray-300 focus:ring-2 focus:ring-green-500">
             </div>
 
@@ -130,7 +130,7 @@ $con_reg->close();
         </form>
     </div>
 
-    <!-- SECTION: PASSWORD -->
+    <!-- SECTION: PASSWORD
     <div class="bg-white/70 backdrop-blur-lg shadow-xl rounded-3xl p-8 mb-10">
         <h3 class="text-2xl font-bold text-[#2f5d31] mb-6">ความปลอดภัย</h3>
 
@@ -158,7 +158,7 @@ $con_reg->close();
 
             <button type="submit" name="change_password" class="px-6 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 mt-3">เปลี่ยนรหัสผ่าน</button>
         </form>
-    </div>
+    </div> -->
 
     <!-- SECTION: DANGER ZONE -->
     <div class="bg-red-50 border border-red-300 shadow-xl rounded-3xl p-8 mb-10">

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("database/db.php");
+include("backend/db.php");
 require_once __DIR__ . "/components/mailer.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -53,6 +53,8 @@ $ins->execute();
 <html lang="th">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Forgot Password</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
@@ -60,12 +62,20 @@ $ins->execute();
   </style>
 </head>
 
-<body class="bg-[#f8d7a0] min-h-screen relative overflow-hidden">
-  <a href="login.php" class="absolute top-6 left-6 bg-[#d9c29c] p-3 rounded-full shadow-md text-xl">←</a>
+<body class="bg-[#f8d7a0] min-h-screen relative overflow-hidden flex items-center justify-center px-3 sm:px-6 py-8 sm:py-12">
 
-  <div class="flex justify-center pt-24 px-6">
-    <div class="w-full max-w-md bg-[#e8c99a] bg-opacity-60 rounded-3xl shadow-xl p-8 relative">
-      <img src="assets/images/dog_popup.png"
+  <a href="login.php"
+        class="absolute top-4 left-4 sm:top-6 sm:left-6 bg-[#d9c29c] p-2.5 sm:p-3 rounded-full shadow-md text-lg sm:text-xl">
+        ←
+    </a>
+
+      <!-- CENTER CONTAINER -->
+    <div class="w-full max-w-[420px] sm:max-w-md relative">
+
+        <!-- FORM BOX -->
+        <div class="w-full bg-[#e8c99a] bg-opacity-60 rounded-3xl shadow-xl p-6 sm:p-8 relative">
+      
+    <img src="assets/images/dog_popup.png"
         class="w-32 absolute inset-x-0 mx-auto -top-20 drop-shadow-lg animate-[floatDog_3s_ease-in-out_infinite]">
 
       <h2 class="text-center text-2xl font-extrabold text-gray-800 mt-10">ลืมรหัสผ่าน</h2>

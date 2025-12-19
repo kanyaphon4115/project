@@ -2,10 +2,10 @@
 session_start();
 
 // DB ฟอร์ม
-$con_forms = new mysqli("localhost", "root", "", "adopt_forms");
+$con_forms = new mysqli("localhost", "root", "", "pet_home");
 
 // DB สุนัข
-$con_dogs = new mysqli("localhost", "root", "", "ped_home");
+$con_dogs = new mysqli("localhost", "root", "", "pet_home");
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
@@ -143,223 +143,133 @@ $res_forms = $con_forms->query("
 <html lang="th">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Request Status - PawHome</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<style>
-    body { font-family: 'Prompt', sans-serif; }
-</style>
 </head>
 
 <body class="bg-[#f7d7a3] min-h-screen">
 
-<!-- NAVBAR -->
-<nav class="w-full fixed top-0 left-0 bg-white/40 backdrop-blur-md shadow-sm py-4 z-20">
-    <div class="flex items-center px-6">
+<!-- BG (เบลเฉพาะพื้นหลัง) -->
+    <div class="fixed inset-0 -z-10">
+        <div class="absolute inset-0 bg-repeat"
+            style="background-image:url('assets/images/bg_pethome_pattern.jpg'); background-size:300px;"></div>
 
-        <!-- LOGO -->
-        <h1 class="flex items-center gap-3 text-2xl font-extrabold text-[#2f5d31]">
-            <div class="bg-white rounded-full shadow-md p-1 px-2">🐾</div>
-            PawHome
-        </h1>
+        <!-- ถ้าอยากให้จางลง -->
+        <div class="absolute inset-0 bg-white/70"></div>
 
-        <!-- MENU -->
-        <ul class="flex items-center space-x-6 text-gray-900 ml-auto">
-            <li><a href="homeped.php" class="hover:text-green-700">HOME</a></li>
-            <li><a href="form.php" class="hover:text-green-700">FORM</a></li>
-            <li><a href="donate.php" class="hover:text-green-700">DONATE</a></li>
-            <li><a href="request_status.php" class="text-green-700 font-bold">REQUEST STATUS</a></li>
-
-            <!-- PROFILE -->
-            <?php if(isset($_SESSION['user_id'])): ?>
-            <li class="relative" id="profileMenu">
-
-                <button id="profileBtn" type="button" class="w-10 h-10 rounded-full bg-green-300 shadow-md overflow-hidden flex items-center justify-center">
-                    <?php if ($avatar_src): ?>
-                        <img src="<?= $avatar_src ?>" class="w-full h-full object-cover">
-                    <?php else: ?>
-                        <span class="text-white font-bold"><?= strtoupper($_SESSION['email'][0]); ?></span>
-                    <?php endif; ?>
-                </button>
-
-                <!-- DROPDOWN -->
-                <div id="profileDropdown" class="hidden absolute right-0 mt-3 w-60 bg-white shadow-xl rounded-xl p-4 text-gray-700 transition">
-
-                    <p class="text-sm text-gray-500">เข้าสู่ระบบเป็น</p>
-                    <p class="font-bold"><?= explode("@", $_SESSION['email'])[0]; ?></p>
-                    <p class="text-sm"><?= $_SESSION['email']; ?></p>
-
-                    <hr class="my-3">
-                    <a href="setting.php" class="block py-1 font-medium hover:text-red-600 transition">⚙️ ตั้งค่า</a>
-                    <a href="profile.php" class="block py-1 font-medium hover:text-red-600 transition">👤 โปรไฟล์</a>
-                    <a href="about_us.php" class="block py-1 font-medium hover:text-red-600 transition">ℹ️ About Us</a>
-
-                    <hr class="my-3">
-                    <a href="index.php" class="text-red-600 font-bold">ออกจากระบบ</a>
-                </div>
-
-            </li>
-            <?php else: ?>
-
-            <li>
-                <a href="login.php" class="px-5 py-2 rounded-full bg-green-600 text-white font-semibold shadow-md hover:bg-green-700 transition">
-                   Login
-                </a>
-            </li>
-
-            <?php endif; ?>
-        </ul>
-    </div>
-</nav>
-
-<div class="pt-28"></div>
-
-<div class="text-center">
-    <div class="bg-white rounded-3xl w-64 mx-auto p-5 shadow">
-        <div class="text-4xl">📋</div>
-
-        <p class="text-2xl font-bold text-[#2f5d31] whitespace-nowrap">
-            สถานะคำขอรับเลี้ยง
-        </p>
-
+        <!-- เบลเฉพาะพื้นหลัง -->
+        <div class="absolute inset-0 backdrop-blur-sm"></div>
     </div>
 
-    <p class="text-gray-700 mt-4 text-xl">
-    ตรวจสอบรายการสุนัขที่คุณขอรับเลี้ยง
-</p>
+    <!-- NAVBAR -->
+    <?php include __DIR__ . '/components/navbar.php'; ?>
 
+<div class="pt-24 sm:pt-28 px-4 sm:px-6">
+  <div class="text-center">
+    <div class="bg-white/85 backdrop-blur rounded-3xl w-[92%] max-w-md mx-auto p-4 sm:p-6 shadow">
+      <div class="text-3xl sm:text-4xl">📋</div>
+
+      <p class="text-xl sm:text-3xl font-extrabold text-[#2f5d31]">
+        สถานะคำขอรับเลี้ยง
+      </p>
+    </div>
+
+    <p class="text-gray-700 mt-3 sm:mt-4 text-base sm:text-xl">
+      ตรวจสอบรายการสุนัขที่คุณขอรับเลี้ยง
+    </p>
+  </div>
 </div>
-
 
 
 <!-- LIST -->
-<div class="max-w-3xl mx-auto mt-10 space-y-6 mb-24">
+<div class="max-w-4xl mx-auto mt-8 sm:mt-10 px-4 sm:px-6 space-y-4 sm:space-y-6 pb-24">
 
 <?php if ($res_forms->num_rows == 0): ?>
 
-    <div class="text-center bg-white p-6 rounded-2xl shadow text-gray-700">
-        ยังไม่มีรายการรับเลี้ยง
-    </div>
+  <div class="text-center bg-white/80 backdrop-blur p-6 rounded-2xl shadow text-gray-700">
+      ยังไม่มีรายการรับเลี้ยง
+  </div>
 
-<?php else: 
+<?php else:
 
-
-// แสดงรายการทีละรายการ
-while ($f = $res_forms->fetch_assoc()):
-
-    $dog_id = $f['dog_id'];
-    $dog = $con_dogs->query("SELECT * FROM dogs WHERE id=$dog_id")->fetch_assoc();
-
-    if (!$dog) continue;
-
-    // โหลดสถานะจาก JSON
-$status_file = "admin/status.json";
-    $status_list = [];
-
-    if (file_exists($status_file)) {
-        $status_list = json_decode(file_get_contents($status_file), true);
-    }
-
-    // สถานะปัจจุบัน
-    $form_id = $f["id"];
-    $status = $status_list[$form_id] ?? "Pending";
-
-    $badge_color = [
-        "Pending"  => "bg-yellow-200 text-yellow-800",
-        "Approved" => "bg-green-200 text-green-800",
-        "Rejected" => "bg-red-200 text-red-800"
-    ][$status];
-
+  // โหลดสถานะจาก JSON (ทำครั้งเดียวพอ)
+  $status_file = "admin/status.json";
+  $status_list = [];
+  if (file_exists($status_file)) {
+      $status_list = json_decode(file_get_contents($status_file), true) ?: [];
+  }
 ?>
 
-<div class="bg-white shadow-md rounded-2xl p-5 flex gap-5 border border-[#e6d5b8] hover:shadow-xl transition duration-300">
-
-    <img src="<?= $dog['image'] ?>" 
-         class="w-32 h-32 rounded-2xl object-cover shadow-md border">
-
-    <div class="flex flex-col justify-between w-full">
-        
-        <div>
-            <p class="text-2xl font-bold text-[#2f5d31] flex items-center gap-3">
-                <?= $dog['name'] ?>
-                <span class="px-3 py-1 text-sm rounded-full <?= $badge_color ?>">
-                    <?= $status ?>
-                </span>
-            </p>
-
-            <p class="text-gray-600 text-sm">
-                <?= $dog['gender'] ?> • อายุ <?= $dog['age'] ?>
-            </p>
-        </div>
-
-        <div class="flex justify-between mt-4">
-
-            <a href="dog_details.php?id=<?= $dog_id ?>" 
-               class="text-green-700 font-semibold hover:text-green-900 transition">
-                ➜ ดูรายละเอียดสุนัข
-            </a>
-
-           <a href="#" 
-   onclick="openDeletePopup(<?= $f['id'] ?>)"
-   class="text-red-600 font-semibold hover:text-red-800 transition">
-    🗑️ ลบ
-</a>
-
-
-        </div>
-    </div>
-
-</div>
-
-<?php endwhile; endif; ?>
-
-</div>
-<!-- PAGINATION -->
-<div class="flex justify-center mt-10 space-x-2">
+  <?php while ($f = $res_forms->fetch_assoc()): ?>
 
     <?php
-    // ตั้งจำนวนหน้าที่ต้องการให้แสดง
-    $show = 3;
+      $dog_id = (int)$f['dog_id'];
+      $dog = $con_dogs->query("SELECT * FROM dogs WHERE id=$dog_id")->fetch_assoc();
+      if (!$dog) continue;
 
-    // คำนวณจุดเริ่ม – จบ
-    $start_page = max(1, $page - floor($show/2));
-    $end_page = min($total_pages, $start_page + $show - 1);
+      $form_id = (int)$f['id'];
+      $status  = $status_list[$form_id] ?? "Pending";
 
-    // ถ้าจำนวนหน้ารวมยังไม่ถึง 3 ให้ปรับใหม่
-    if ($end_page - $start_page + 1 < $show) {
-        $start_page = max(1, $end_page - $show + 1);
-    }
+      $badge_color = [
+          "Pending"  => "bg-yellow-200 text-yellow-800",
+          "Approved" => "bg-green-200 text-green-800",
+          "Rejected" => "bg-red-200 text-red-800"
+      ][$status] ?? "bg-gray-200 text-gray-800";
+
+      $img = $dog['image'] ?? '';
+      $img = ltrim($img, '/');
+      $src = (str_starts_with($img, 'assets/')) ? $img : 'assets/' . $img;
     ?>
 
-    <!-- ปุ่ม Prev -->
-    <?php if ($page > 1): ?>
-        <a href="?page=<?= $page-1 ?>" 
-           class="px-3 py-1 bg-white border rounded-lg hover:bg-gray-200">Previous</a>
-    <?php endif; ?>
+    <div class="bg-white shadow-md rounded-2xl p-4 sm:p-5 border border-[#e6d5b8] hover:shadow-xl transition duration-300
+                flex flex-col sm:flex-row gap-4 sm:gap-5 w-full">
 
+      <img src="<?= htmlspecialchars($src) ?>"
+           alt="<?= htmlspecialchars($dog['name'] ?? 'dog') ?>"
+           class="w-full sm:w-32 h-52 sm:h-32 rounded-2xl object-cover shadow-md border">
 
-    <!-- ปุ่มหมายเลข -->
-    <?php for ($i = $start_page; $i <= $end_page; $i++): ?>
-        <a href="?page=<?= $i ?>" 
-           class="px-3 py-1 rounded 
-           <?= $page == $i ? 'bg-blue-500 text-white' : 'bg-white border' ?>">
-           <?= $i ?>
-        </a>
-    <?php endfor; ?>
+      <div class="flex flex-col justify-between w-full">
+        <div>
+          <p class="text-lg sm:text-2xl font-bold text-[#2f5d31] flex flex-wrap items-center gap-2 sm:gap-3">
+            <?= htmlspecialchars($dog['name']) ?>
+            <span class="px-3 py-1 text-xs sm:text-sm rounded-full <?= $badge_color ?>">
+              <?= htmlspecialchars($status) ?>
+            </span>
+          </p>
 
+          <p class="text-gray-600 text-sm mt-1">
+            <?= htmlspecialchars($dog['gender']) ?> • อายุ <?= htmlspecialchars($dog['age']) ?>
+          </p>
+        </div>
 
-    <!-- ปุ่ม Next -->
-    <?php if ($page < $total_pages): ?>
-        <a href="?page=<?= $page+1 ?>" 
-           class="px-3 py-1 bg-white border rounded-lg hover:bg-gray-200">Next</a>
-    <?php endif; ?>
+        <div class="flex justify-between items-center mt-4">
+          <a href="dog_details.php?id=<?= $dog_id ?>"
+             class="text-green-700 font-semibold hover:text-green-900 transition">
+            ➜ ดูรายละเอียดสุนัข
+          </a>
+
+          <a href="#"
+             onclick="openDeletePopup(<?= $form_id ?>)"
+             class="text-red-600 font-semibold hover:text-red-800 transition">
+            🗑️ ลบ
+          </a>
+        </div>
+      </div>
+    </div>
+
+  <?php endwhile; ?>
+
+<?php endif; ?>
 
 </div>
+
 
 <!-- DELETE CONFIRM POPUP -->
 <div id="deletePopup" 
      class="fixed inset-0 hidden bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
 
-    <div class="bg-white w-[380px] p-6 rounded-2xl shadow-xl flex items-center gap-4 animate-pop">
+    <div class="bg-white w-[92vw] max-w-[380px] p-5 sm:p-6 rounded-2xl shadow-xl flex items-center gap-4 animate-pop">
 
         <!-- ICON LEFT -->
         <div class="text-5xl text-red-500">
@@ -394,70 +304,6 @@ $status_file = "admin/status.json";
 .animate-pop { animation: pop .25s ease-out; }
 </style>
 
-<script>
-// Click to open, hold to close
-document.addEventListener('DOMContentLoaded', function(){
-    var btn = document.getElementById('profileBtn');
-    var dropdown = document.getElementById('profileDropdown');
-    if (!btn || !dropdown) return;
-
-    var holdTimer = null;
-    var holdTime = 350; // ms
-    var isHolding = false;
-
-    function openDropdown(){
-        dropdown.classList.remove('hidden');
-    }
-    function closeDropdown(){
-        dropdown.classList.add('hidden');
-    }
-
-    // Single click to open
-    btn.addEventListener('click', function(e){
-        e.stopPropagation();
-        if (!isHolding) {
-            openDropdown();
-        }
-    });
-
-    // Hold to close
-    function startHold(e){
-        e.stopPropagation();
-        isHolding = true;
-        if (holdTimer) clearTimeout(holdTimer);
-        holdTimer = setTimeout(function(){
-            closeDropdown();
-            isHolding = false;
-            holdTimer = null;
-        }, holdTime);
-    }
-
-    function cancelHold(e){
-        if (holdTimer) { clearTimeout(holdTimer); holdTimer = null; }
-        isHolding = false;
-    }
-
-    // Mouse events
-    btn.addEventListener('mousedown', startHold);
-    btn.addEventListener('mouseup', cancelHold);
-    btn.addEventListener('mouseleave', cancelHold);
-
-    // Touch events
-    btn.addEventListener('touchstart', startHold, {passive: false});
-    btn.addEventListener('touchend', cancelHold);
-    btn.addEventListener('touchcancel', cancelHold);
-
-    // Keep dropdown open when interacting inside
-    dropdown.addEventListener('click', function(e){ e.stopPropagation(); });
-
-    // Close when clicking elsewhere
-    document.addEventListener('click', function(e){
-        if (!btn.contains(e.target) && !dropdown.contains(e.target)) {
-            closeDropdown();
-        }
-    });
-});
-</script>
 <script>
 function openDeletePopup(id) {
     document.getElementById("confirmDeleteBtn").href = "?delete_id=" + id;

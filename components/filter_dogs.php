@@ -46,3 +46,6 @@ while ($dog = $result->fetch_assoc()):
         </div>
     </div>
 <?php endwhile; ?>
+
+
+

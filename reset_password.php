@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("database/db.php");
+include("backend/db.php");
 
 // ต้องผ่าน OTP มาก่อน
 $user_id = $_SESSION['otp_verified_user_id'] ?? null;
@@ -54,6 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reset Password</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -73,19 +74,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </style>
 </head>
 
-<body class="bg-[#f8d7a0] min-h-screen relative overflow-hidden">
+<body class="bg-[#f8d7a0] min-h-screen relative overflow-hidden flex items-center justify-center px-3 sm:px-6 py-8 sm:py-12">
 
     <!-- BACK BUTTON -->
     <a href="login.php"
-        class="absolute top-6 left-6 bg-[#d9c29c] p-3 rounded-full shadow-md text-xl">
+        class="absolute top-4 left-4 sm:top-6 sm:left-6 bg-[#d9c29c] p-2.5 sm:p-3 rounded-full shadow-md text-lg sm:text-xl">
         ←
     </a>
 
-    <!-- CENTER -->
-    <div class="flex justify-center pt-24 px-6">
+    <!-- CENTER CONTAINER -->
+    <div class="w-full max-w-[420px] sm:max-w-md relative">
 
-        <!-- BOX -->
-        <div class="w-full max-w-md bg-[#e8c99a] bg-opacity-60 rounded-3xl shadow-xl p-8 relative">
+        <!-- FORM BOX -->
+        <div class="w-full bg-[#e8c99a] bg-opacity-60 rounded-3xl shadow-xl p-6 sm:p-8 relative">
+      <img src="assets/images/dog_popup.png"
+        class="w-32 absolute inset-x-0 mx-auto -top-20 drop-shadow-lg animate-[floatDog_3s_ease-in-out_infinite]">
 
             <!-- DOG IMAGE -->
             <img src="assets/images/dog_popup.png"

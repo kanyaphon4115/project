@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("database/db_ped.php");
+include("backend/db_ped.php");
 
 if (!isset($_SESSION['user_id'])) {
     // allow viewing but profile actions require login; keep simple

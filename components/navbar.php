@@ -2,14 +2,19 @@
 <nav class="w-full fixed top-0 left-0 bg-white/40 shadow-sm py-4 z-50">
   <div class="flex items-center px-4 sm:px-6 justify-between">
 
-
-    
+  <!-- เฉพาะหน้า home_ped -->
+  <?php if (basename($_SERVER['PHP_SELF']) == 'homeped.php'): ?>
+    <button id="openFilter" class="text-2xl mr-4 hover:text-green-700">☰</button>
+<?php endif; ?>
 
     <!-- LOGO -->
-    <h1 class="flex items-center gap-3 text-xl sm:text-2xl font-extrabold text-[#2f5d31]">
-      <div class="bg-white rounded-full shadow-md p-1 px-2">🐾</div>
-      PawHome
-    </h1>
+    <h1>
+  <a href="index.php" class="flex items-center gap-3 text-xl sm:text-2xl font-extrabold text-[#2f5d31]">
+    <div class="bg-white rounded-full shadow-md p-1 px-2">🐾</div>
+    PawHome
+  </a>
+</h1>
+
 
     <!-- ☰ MOBILE MENU BUTTON (แสดงเฉพาะจอเล็ก) -->
     <button id="mobileMenuBtn"
